@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treats de Cuisine — A Front Door, Staffed · Concept Sample</title>
+<style>
+  :root{ --ink:#16130e; --paper:#fdfcf8; --card:#ffffff; --gold:#e9b949; --goldsoft:#f7e8bd; --mut:#6d675a; --line:#e6e0d0; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Avenir Next","Segoe UI", Arial, sans-serif; background:var(--paper); color:var(--ink);}
+  .samplebar{background:var(--ink); color:#f5efdd; text-align:center; padding:9px 14px; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;}
+  header{text-align:center; padding:36px 20px 8px;}
+  .wordmark{font-family:Georgia, "Times New Roman", serif; font-size:52px; line-height:.95; letter-spacing:.01em;}
+  .wordmark span{display:block; font-size:15px; letter-spacing:.42em; font-family:"Avenir Next", Arial, sans-serif; margin-top:10px; color:var(--ink);}
+  .sub{color:var(--mut); margin-top:12px; font-size:15.5px;}
+  .heart{color:var(--gold);}
+  .hero{text-align:center; padding:26px 20px 6px; max-width:820px; margin:0 auto;}
+  .hero h2{font-family:Georgia, serif; font-size:32px; line-height:1.2; font-weight:600;}
+  .hero p{margin-top:12px; color:#3d382e; font-size:16.5px; line-height:1.55;}
+  section{max-width:980px; margin:0 auto; padding:30px 20px;}
+  h3.sect{font-family:Georgia, serif; font-size:25px; margin-bottom:6px;}
+  p.lede{color:var(--mut); line-height:1.55; max-width:780px; margin-bottom:18px; font-size:15.5px;}
+  .today{background:var(--goldsoft); border:1.5px solid var(--gold); border-radius:14px; padding:18px 22px; line-height:1.55;}
+  .today b{letter-spacing:.06em; text-transform:uppercase; font-size:13px;}
+  .chat{background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:22px; box-shadow:0 6px 24px rgba(20,16,8,.06);}
+  .chat h4{font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--mut); margin-bottom:14px;}
+  .msg{max-width:86%; padding:11px 15px; border-radius:14px; margin-bottom:9px; font-size:15px; line-height:1.5;}
+  .visitor{background:#f1ede1; border-bottom-left-radius:4px;}
+  .crew{background:var(--ink); color:#faf6ea; margin-left:auto; border-bottom-right-radius:4px;}
+  .crew b{color:var(--gold);}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .prod{background:var(--card); border:1.5px solid var(--line); border-radius:14px; padding:18px;}
+  .prod h4{font-family:Georgia, serif; font-size:19px;}
+  .prod .price{color:#8a6d1f; font-weight:700; margin:4px 0 8px;}
+  .prod p{font-size:14.5px; line-height:1.5; color:#3d382e;}
+  .quotes{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px;}
+  .quote{background:var(--card); border-left:4px solid var(--gold); border-radius:8px; padding:16px 18px; font-family:Georgia, serif; font-style:italic; font-size:16.5px; line-height:1.5;}
+  .quote small{display:block; margin-top:8px; font-family:"Avenir Next", Arial, sans-serif; font-style:normal; font-size:12.5px; color:var(--mut); letter-spacing:.04em;}
+  .offer{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .tile{background:var(--ink); color:#f3edda; border-radius:14px; padding:20px;}
+  .tile h4{font-family:Georgia, serif; color:#fff; font-size:18px; margin-bottom:8px;}
+  .tile p{font-size:14.5px; line-height:1.55; color:#ddd5bd;}
+  .tile .tag{display:inline-block; background:var(--gold); color:var(--ink); font-size:11.5px; font-weight:800; letter-spacing:.08em; padding:3px 9px; border-radius:999px; margin-bottom:10px; text-transform:uppercase;}
+  .ask{background:var(--card); border:2px solid var(--ink); border-radius:16px; padding:26px; text-align:center;}
+  .ask h3{font-family:Georgia, serif; font-size:26px; margin-bottom:10px;}
+  .ask p{max-width:700px; margin:0 auto; line-height:1.6; color:#3d382e;}
+  .turn{background:var(--ink); border-radius:18px; padding:28px 24px; color:#f3edda;}
+  .turn h3{font-family:Georgia, serif; font-size:26px; color:#fff; margin-bottom:8px;}
+  .turn p.intro{color:#ddd5bd; line-height:1.6; font-size:15.5px; max-width:760px;}
+  .fb{background:var(--card); color:var(--ink); border-radius:14px; padding:22px; margin-top:20px;}
+  .fb .prog{font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--mut); margin-bottom:12px;}
+  .fb .q{font-family:Georgia, serif; font-size:19px; line-height:1.4; margin-bottom:12px;}
+  .fb textarea,.fb input[type=text],.fb input[type=email]{width:100%; border:1.5px solid var(--line); border-radius:10px; padding:11px 13px; font-size:15px; font-family:inherit; margin-bottom:10px; background:#fffdf6;}
+  .fbtn{display:inline-block; background:var(--ink); color:#faf6ea; border:1.5px solid var(--ink); border-radius:999px; padding:10px 20px; font-size:14.5px; font-weight:700; cursor:pointer; margin:4px 6px 4px 0;}
+  .fbtn.gold{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+  .fbtn.ghost{background:#fff; color:var(--ink); border-color:var(--line);}
+  .fbtn.sel{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+  .factrow{border:1.5px solid var(--line); border-radius:12px; padding:13px 15px; margin-bottom:10px;}
+  .factrow .fl{font-size:15.5px; line-height:1.45; margin-bottom:8px;}
+  .chanrow{display:block; border:1.5px solid var(--line); border-radius:12px; padding:12px 15px; margin-bottom:10px; font-size:15.5px; cursor:pointer;}
+  .chanrow input{margin-right:9px;}
+  .scoreline{font-family:Georgia, serif; font-size:21px; margin:6px 0 12px;}
+  .sum{white-space:pre-wrap; background:#fffdf6; border:1.5px solid var(--line); border-radius:12px; padding:16px; font-size:14.5px; line-height:1.6; margin-bottom:14px;}
+  .fineprint{color:var(--mut); font-size:13px; line-height:1.55; margin-top:12px;}
+  footer{border-top:1.5px solid var(--line); padding:24px 20px 34px; text-align:center; color:var(--mut); font-size:13px; line-height:1.6; max-width:860px; margin:0 auto;}
+</style>
+</head>
+<body>
+
+<div class="samplebar">Concept sample — prepared for Kat at Treats de Cuisine · Not published · Her facts, our front door</div>
+
+<header>
+  <div class="wordmark">treats<br>de cuisine<span>PET TREATS</span></div>
+  <p class="sub">Butcher Shop &amp; Deli · 1341 N. Damen Ave, Wicker Park · Handmade with <span class="heart">💛</span> in Chicago</p>
+</header>
+
+<div class="hero">
+  <h2>Handmade, locally-sourced, farm-to-paw — now with a front door that's always open.</h2>
+  <p>Kat makes the treats. This is the shop answering back: every question, every hour, in her voice — what's fresh, where to find her today, and your dog's usual, remembered.</p>
+</div>
+
+<section>
+  <div class="today"><b>Today at the shop — Saturday</b><br>
+  The butcher shop &amp; deli is open <b>9 AM – 5 PM</b>. Saturday morning you'll also find the Treats de Cuisine stall at <b>Green City Market</b> (Lincoln Park &amp; the West Loop). <i style="color:#6d675a">— the greeter knows this because it learned her listings, her market schedule, and her posts. That's ingestion.</i></div>
+</section>
+
+<section>
+  <h3 class="sect">The conversation — this is the wow</h3>
+  <p class="lede">A demonstration script. Every answer below is a true fact about Kat's business — her hours, her farms, her products, her prices, even what she posted this week. The system learned her business by ingesting it, the way it would learn any owner's.</p>
+  <div class="chat">
+    <h4>Sample — the front door, staffed</h4>
+    <div class="msg visitor">Are you open today? And where's the market stall?</div>
+    <div class="msg crew"><b>Greeter:</b> Both! The shop on Damen is open 9 to 5 today, and this morning we're at Green City Market in Lincoln Park until about 1. Whichever's closer — the full case is at the shop.</div>
+    <div class="msg visitor">What's actually in the chicken tenders? My dog has allergies.</div>
+    <div class="msg crew"><b>Greeter:</b> One ingredient: chicken breast from Slagel Family Farm, right here in Illinois — hand-sliced and dehydrated, nothing added, ever. 90% protein on the guaranteed analysis. For allergy pups, tell me what you're avoiding and I'll match the treat to it.</div>
+    <div class="msg visitor">I saw on Facebook the salmon's back?</div>
+    <div class="msg crew"><b>Greeter:</b> It is — freeze-dried salmon, back in stock this week, $13. It goes fast. Want me to set a bag aside at Damen under your name?</div>
+    <div class="msg visitor">Can Franklin get a treat packet every two weeks without me remembering to reorder?</div>
+    <div class="msg crew"><b>Greeter:</b> Yes. Tell me Franklin's favorites and anything he can't have, and I'll build his packet, remind you before each one, and have it ready every two weeks for pickup or shipping. Pause it or swap a treat any time.</div>
+    <div class="msg visitor">Can I pay for Franklin's packets with a gift card I load up front?</div>
+    <div class="msg crew"><b>Greeter:</b> You can. Load the card once, and I'll draw each packet from the balance, show you what's left, and warn you before it runs low. If Kat is offering a load-up bonus, I'll apply exactly the terms she approved — no surprise charges.</div>
+    <div class="msg visitor">It's my sister's dog's birthday next week.</div>
+    <div class="msg crew"><b>Greeter:</b> A BARKday, then. We do gift cards — I can put $25 on one with the doggie doughnut on the front and a note from you, and email it to her today. Whose name goes on the card — the dog's, obviously?</div>
+    <div class="msg visitor">I run a grooming salon — do you wholesale?</div>
+    <div class="msg crew"><b>Greeter:</b> We do — shops and cafés across the city carry us. Three quick things so I can hand Kat a clean brief: your salon's name, roughly how much you'd start with, and where you're located. She'll write you back herself.</div>
+  </div>
+</section>
+
+<section>
+  <h3 class="sect">Top sellers — her shelf, as it stands</h3>
+  <div class="grid">
+    <div class="prod"><h4>Chicken Tenders</h4><div class="price">from $12 · 2oz / 4oz</div><p>100% chicken breast from Slagel Family Farm, hand-sliced and dehydrated. No additives or preservatives.</p></div>
+    <div class="prod"><h4>Filet</h4><div class="price">from $12 · 2oz / 4oz</div><p>100% lean beef from Slagel Family Farm, hand-sliced and dehydrated. The steakhouse course, for dogs.</p></div>
+    <div class="prod"><h4>Pup Prosciutto</h4><div class="price">$20 · 2oz</div><p>100% pork loin from Catalpa Grove Farm, dehydrated or freeze-dried. The fancy one — and worth it.</p></div>
+    <div class="prod"><h4>Pig Ear</h4><div class="price">$8 · large</div><p>A long-lasting chew. Kat's in-store tip for Franklin, passed along by Mike: freeze it to make the chew last even longer.</p></div>
+  </div>
+</section>
+
+<section>
+  <h3 class="sect">What her Pupstomers say</h3>
+  <div class="quotes">
+    <div class="quote">"I walked in with Franklin, and he smelled the treats right away. Kat suggested freezing the pig ear so Franklin could chew on it longer. Franklin loves it."<small>— Mike M., a real first customer · draft wording for Mike to confirm before Kat uses it publicly</small></div>
+    <div class="quote">"Everything I sampled was DELICIOUS!"<small>— from her customer reviews</small></div>
+    <div class="quote">"Letty declared her doggie doughnut to be SCRUMPTIOUS!"<small>— from her own posts, of a happy Pupstomer</small></div>
+    <div class="quote">"First time trying a lamb's ear — it was a huge success!"<small>— from her customer posts</small></div>
+  </div>
+</section>
+
+<section>
+  <h3 class="sect">No new domain. No takeover.</h3>
+  <p class="lede">Kat keeps <b>treatsdecuisine.com</b>, her email, and her existing store. During development, the interactive experience opens from a private preview link or QR code. For the pilot, she or her web person adds one button — “Chat with us” — or points one subdomain, such as <b>chat.treatsdecuisine.com</b>, to Doma's secure front door. Later she can keep the link, embed the greeter, take full ownership of the finished site, or move more of the site over — her choice at each step.</p>
+</section>
+
+<section>
+  <h3 class="sect">What we'd build for her — kept simple</h3>
+  <div class="offer">
+    <div class="tile"><span class="tag">Founding gift</span><h4>The Website</h4><p>Her site, modernized — her look, her words, her shelves in order. As a founding user, the build is our gift. She keeps her domain and her store, always.</p></div>
+    <div class="tile"><span class="tag">The front door</span><h4>Chat &amp; a Phone That Answers</h4><p>A greeter on the site and a number customers can call (Twilio), answered in her voice, knowing today's hours, the market schedule, and what's back in stock — because it reads what she posts.</p></div>
+    <div class="tile"><span class="tag">The regulars engine</span><h4>Recurring, Promotions, Gift Cards</h4><p>Franklin's packet every two weeks, market-day promotions, reloadable gift cards and BARKday cards — the repeat business a treat shop lives on, run quietly in the background.</p></div>
+    <div class="tile"><span class="tag">The learning</span><h4>It Keeps Learning Her</h4><p>Every post, every market date, every new farm partner becomes an answer the same day. Ask once, remember everything — her customers never repeat themselves.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="ask">
+    <h3>The founding-Pupstomer ask</h3>
+    <p>Kat — be one of the first. The site is our gift; the front door is our handshake. Run it for a season. If it earns — in orders you can count — tell the truth about it in a review other owners can read. That's the whole deal: we do it straight, and you say how it went. <b>It just gets done.</b></p>
+  </div>
+</section>
+
+<section>
+  <div class="turn">
+    <h3>Your turn, Kat — the honest feedback part</h3>
+    <p class="intro">Everything above is our <b>first cut</b> at your business, built from the outside looking in. This part is the real product: tell us what we got right, what we got wrong, and what felt unlike you — then try to break the greeter. Your answers are how the second cut gets made, and they're how we keep score on ourselves: how much of a first cut survives the owner's eye. Three minutes, one question at a time, skip anything you like.</p>
+    <div class="fb" id="dc-box"><div class="q">Kat, tell us what you think — we’ll make another cut at it.</div><p style="line-height:1.6;color:#3d382e;">Four quick fact-checks, then five short questions. And if you’re not a texter: every answer box takes dictation — tap the microphone on your keyboard and just talk.</p></div>
+    <p class="fineprint" style="color:#bdb294">Demonstration build: in the live system these answers land directly in your feedback record, and turning on your channel below switches on the text-back and tap-to-call loop. In this sample, the finished summary travels to Mike by email — nothing is stored or sent until you press the button.</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var box=document.getElementById('dc-box');
+  var FACTS=[
+    "Saturday hours at the shop: 9 AM to 5 PM.",
+    "Chicken Tenders: from $12 — 100% chicken breast from Slagel Family Farm.",
+    "The shop: 1341 N. Damen Ave, Wicker Park — a butcher shop & deli for pets.",
+    "Saturday mornings, there's also a Treats de Cuisine stall at Green City Market."
+  ];
+  var QS=[
+    {k:'liked', q:"Before anything else — what did you like? What felt like you?"},
+    {k:'disliked', q:"What did you not like? What felt unlike your business, your voice, or your customers?"},
+    {k:'breakit', q:"Try to break it: ask the greeter up top something hard — the question your most difficult customer would ask. What happened?"},
+    {k:'tired', q:"What business work are you tired of doing by hand — files and lists, campaigns, follow-ups, reorders, wholesale emails?"},
+    {k:'onechange', q:"If we changed only one thing in the next cut, what should it be?"}
+  ];
+  var A={facts:{}, open:{}, channels:[], name:'', contact:''};
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  function start(){
+    box.innerHTML='<div class="q">Kat, tell us what you think — we\u2019ll make another cut at it.</div>'
+      +'<p style="line-height:1.6;color:#3d382e;margin-bottom:14px;">First, four quick fact-checks — tap Right or Wrong on each. Then five short questions. Wrong answers are the most valuable thing on this page: every correction makes the next cut smarter, and it\u2019s how we score our own first cut. Not a texter? Every answer box takes dictation — tap the microphone on your keyboard and just talk.</p>'
+      +'<button class="fbtn gold" id="dc-go">Start — about 3 minutes</button>';
+    document.getElementById('dc-go').onclick=facts;
+  }
+  function facts(){
+    var h='<div class="prog">Step 1 of 3 · Fact-check the first cut</div>';
+    FACTS.forEach(function(f,i){
+      h+='<div class="factrow"><div class="fl">'+esc(f)+'</div>'
+        +'<button class="fbtn ghost" data-f="'+i+'" data-v="right">Right</button>'
+        +'<button class="fbtn ghost" data-f="'+i+'" data-v="wrong">Wrong</button>'
+        +'<div id="dc-corr-'+i+'"></div></div>';
+    });
+    h+='<button class="fbtn gold" id="dc-next1">Continue</button>';
+    box.innerHTML=h;
+    box.querySelectorAll('[data-f]').forEach(function(b){
+      b.onclick=function(){
+        var i=b.getAttribute('data-f'), v=b.getAttribute('data-v');
+        A.facts[i]=v;
+        box.querySelectorAll('[data-f="'+i+'"]').forEach(function(x){x.classList.remove('sel');});
+        b.classList.add('sel');
+        document.getElementById('dc-corr-'+i).innerHTML = v==='wrong'
+          ? '<input type="text" id="dc-ci-'+i+'" placeholder="What should it say? (your words outrank ours — type it or tap the mic on your keyboard and talk)">' : '';
+      };
+    });
+    document.getElementById('dc-next1').onclick=function(){
+      FACTS.forEach(function(f,i){
+        var c=document.getElementById('dc-ci-'+i);
+        if(c && c.value.trim()){ A.facts['corr'+i]=c.value.trim(); }
+      });
+      openQ(0);
+    };
+  }
+  function openQ(n){
+    if(n>=QS.length){ channel(); return; }
+    var item=QS[n];
+    box.innerHTML='<div class="prog">Step 2 of 3 · Question '+(n+1)+' of '+QS.length+'</div>'
+      +'<div class="q">'+esc(item.q)+'</div>'
+      +'<textarea id="dc-ta" rows="4" placeholder="In your words — short is fine."></textarea>'
+      +(SR? '<button class="fbtn ghost" id="dc-mic" type="button">🎙 Tap and talk instead</button>' : '')
+      +'<p class="fineprint">Not a texter? '+(SR? 'Tap the microphone button, or the mic on your keyboard, and just say it — your words land in the box.' : 'Tap the microphone on your keyboard and just say it — your words land in the box.')+'</p>'
+      +'<button class="fbtn gold" id="dc-nq">Next</button>'
+      +'<button class="fbtn ghost" id="dc-sq">Skip</button>';
+    var save=function(){ A.open[item.k]=document.getElementById('dc-ta').value.trim(); openQ(n+1); };
+    document.getElementById('dc-nq').onclick=save;
+    document.getElementById('dc-sq').onclick=function(){ A.open[item.k]=''; openQ(n+1); };
+    if(SR){
+      var rec=null, listening=false, micBtn=document.getElementById('dc-mic');
+      micBtn.onclick=function(){
+        var ta=document.getElementById('dc-ta');
+        if(listening){ rec.stop(); return; }
+        rec=new SR(); rec.lang='en-US'; rec.interimResults=true; rec.continuous=true;
+        var base=ta.value;
+        rec.onresult=function(e){
+          var txt='';
+          for(var j=0;j<e.results.length;j++){ txt+=e.results[j][0].transcript; }
+          ta.value=(base? base.replace(/\s+$/,'')+' ' : '')+txt;
+        };
+        rec.onend=function(){ listening=false; micBtn.textContent='🎙 Tap and talk instead'; };
+        rec.onerror=function(){ listening=false; micBtn.textContent='🎙 Tap and talk instead'; };
+        listening=true; micBtn.textContent='■ Listening — tap to stop';
+        try{ rec.start(); }catch(err){ listening=false; micBtn.textContent='🎙 Tap and talk instead'; }
+      };
+    }
+  }
+  function channel(){
+    box.innerHTML='<div class="prog">Step 3 of 3 · Turn on your channel</div>'
+      +'<div class="q">How should the live feedback loop reach you?</div>'
+      +'<p style="line-height:1.6;color:#3d382e;margin-bottom:12px;">This is the switch. Turn a channel on and, in the live system, the loop runs there: we text you the chat link, you can tap the number and just talk, and you always get a short text back with what we heard. Leave them all off and the sample stays a sample — your call entirely.</p>'
+      +'<label class="chanrow"><input type="checkbox" class="dc-ch" value="Text me a link to the interactive chat">Text me a link to the interactive chat</label>'
+      +'<label class="chanrow"><input type="checkbox" class="dc-ch" value="Tap-to-call: I would rather talk and ask out loud">Tap-to-call — I\u2019d rather talk and ask out loud</label>'
+      +'<label class="chanrow"><input type="checkbox" class="dc-ch" value="Email is fine for the next cut">Email is fine for the next cut</label>'
+      +'<input type="text" id="dc-name" placeholder="Your name">'
+      +'<input type="text" id="dc-contact" placeholder="Mobile or email for the channel">'
+      +'<button class="fbtn gold" id="dc-fin">Finish — show me what you heard</button>';
+    document.getElementById('dc-fin').onclick=function(){
+      A.channels=[]; box.querySelectorAll('.dc-ch').forEach(function(c){ if(c.checked) A.channels.push(c.value); });
+      A.name=document.getElementById('dc-name').value.trim();
+      A.contact=document.getElementById('dc-contact').value.trim();
+      summary();
+    };
+  }
+  function summary(){
+    var right=0, wrong=0;
+    FACTS.forEach(function(f,i){ if(A.facts[i]==='right') right++; if(A.facts[i]==='wrong') wrong++; });
+    var answered=right+wrong;
+    var score= answered? Math.round(100*right/answered) : null;
+    var band= score===null? 'No facts checked — the open answers still count.' :
+      score>=80? 'A strong first cut — and your corrections still make it better.' :
+      score>=50? 'A working first cut — exactly what the second cut is for.' :
+      'A rough first cut — every correction you just gave us is gold. This is the loop working.';
+    var L=[];
+    L.push('TREATS DE CUISINE — FIRST-CUT FEEDBACK');
+    L.push('From: '+(A.name||'Kat')+(A.contact? ' · '+A.contact : ''));
+    L.push('');
+    L.push('FACT-CHECK ('+right+' right, '+wrong+' wrong'+(score!==null? ' — first-cut score: '+score+'%' : '')+'):');
+    FACTS.forEach(function(f,i){
+      var v=A.facts[i]||'not answered';
+      L.push('- ['+v.toUpperCase()+'] '+f+(A.facts['corr'+i]? '  Correction: '+A.facts['corr'+i] : ''));
+    });
+    L.push('');
+    QS.forEach(function(item){ L.push(item.q+'\n'+(A.open[item.k]? A.open[item.k] : '(skipped)')); L.push(''); });
+    L.push('CHANNELS TURNED ON: '+(A.channels.length? A.channels.join('; ') : 'none — keep it a sample for now'));
+    var text=L.join('\n');
+    box.innerHTML='<div class="prog">We heard you</div>'
+      +'<div class="scoreline">First-cut score: '+(score!==null? score+'%' : '—')+'</div>'
+      +'<p style="line-height:1.6;color:#3d382e;margin-bottom:12px;">'+band+' Here is exactly what you told us — nothing paraphrased. Send it to Mike and the next cut gets built from your words.</p>'
+      +'<div class="sum">'+esc(text)+'</div>'
+      +'<a class="fbtn gold" href="mailto:mikemusial@gmail.com?subject='+encodeURIComponent('Treats de Cuisine — my feedback on the first cut')+'&body='+encodeURIComponent(text)+'">Email my answers to Mike</a>'
+      +'<button class="fbtn ghost" id="dc-copy">Copy answers</button>'
+      +'<button class="fbtn ghost" id="dc-redo">Start over</button>';
+    document.getElementById('dc-copy').onclick=function(){
+      if(navigator.clipboard){ navigator.clipboard.writeText(text); this.textContent='Copied'; }
+    };
+    document.getElementById('dc-redo').onclick=start;
+  }
+  start();
+})();
+</script>
+
+<footer>
+  Concept sample prepared by M. Musial &amp; Associates / Doma Zen for discussion with Kat Levitt, Treats de Cuisine. Business facts are drawn from treatsdecuisine.com, her public listings, her market bio, her posts, and Mike's in-store visit: address &amp; phone (773.360.8111), Saturday hours, Green City Market participation, farm partners Slagel Family Farm &amp; Catalpa Grove Farm, product names &amp; prices, wholesale availability, rescue give-back, and Kat's pig-ear freezing tip for Franklin. Listed hours vary between sources — Kat's word governs the live version. This sample demonstrates the knowledge pack and conversation design. Live payments, gift-card issuance, recurring billing, inventory, fulfillment, and phone service require Kat's approval and setup. Not published; not affiliated.
+</footer>
+
+</body>
+</html>
