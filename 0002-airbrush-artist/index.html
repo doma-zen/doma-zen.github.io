@@ -92,7 +92,9 @@
   <div class="grid">
     <div class="card"><h3 data-en="Shirts &amp; hoodies" data-es="Playeras y sudaderas">Shirts &amp; hoodies</h3><p data-en="Names in graffiti letters, portraits, team colors, full scenes — front, back, sleeves." data-es="Nombres en letras de grafiti, retratos, colores del equipo, escenas completas — frente, espalda, mangas.">Names in graffiti letters, portraits, team colors, full scenes — front, back, sleeves.</p></div>
     <div class="card"><h3 data-en="Hats &amp; caps" data-es="Gorras">Hats &amp; caps</h3><p data-en="The party favorite. One cap or the whole team's — painted to be kept, not just worn once." data-es="El favorito de la fiesta. Una gorra o todo el equipo — pintada para guardarse, no solo para un día.">The party favorite. One cap or the whole team's — painted to be kept, not just worn once.</p></div>
-    <div class="card"><h3 data-en="Signs &amp; banners" data-es="Letreros y pancartas">Signs &amp; banners</h3><p data-en="For the shop, the party, the parade float, the bedroom wall. Big letters, bright color." data-es="Para el negocio, la fiesta, el desfile, la pared del cuarto. Letras grandes, color brillante.">For the shop, the party, the parade float, the bedroom wall. Big letters, bright color.</p></div>
+    <div class="card"><h3 data-en="Signs, banners &amp; cards" data-es="Letreros, pancartas y tarjetas">Signs, banners &amp; cards</h3><p data-en="For the shop, the party, the parade float, the bedroom wall — and cards that don't look like everybody else's. Big letters, bright color." data-es="Para el negocio, la fiesta, el desfile, la pared del cuarto — y tarjetas que no se parecen a las de nadie más. Letras grandes, color brillante.">For the shop, the party, the parade float, the bedroom wall — and cards that don't look like everybody else's. Big letters, bright color.</p></div>
+    <div class="card"><h3 data-en="Socks &amp; rags" data-es="Calcetines y trapos">Socks &amp; rags</h3><p data-en="Socks in your team's colors. Rags and bandanas for the crew, the kitchen, the shop floor — the small stuff people actually keep." data-es="Calcetines con los colores de tu equipo. Trapos y bandanas para el equipo de trabajo, la cocina, el taller — las cosas pequeñas que la gente sí guarda.">Socks in your team's colors. Rags and bandanas for the crew, the kitchen, the shop floor — the small stuff people actually keep.</p></div>
+    <div class="card"><h3 data-en="Work crews" data-es="Equipos de trabajo">Work crews</h3><p data-en="A painting company's crew. A food-truck team. A shop's staff. Business attire with his art on it — your logo, his hand." data-es="El equipo de una compañia de pintura. El personal de un food truck. El equipo de un negocio. Ropa de trabajo con su arte — tu logo, su mano.">A painting company's crew. A food-truck team. A shop's staff. Business attire with his art on it — your logo, his hand.</p></div>
     <div class="card"><h3 data-en="Even the dog" data-es="Hasta el perro">Even the dog</h3><p data-en="Bandanas and scarves for the four-legged family member. Because of course." data-es="Pañuelos y bandanas para el miembro de cuatro patas de la familia. Porque claro que sí.">Bandanas and scarves for the four-legged family member. Because of course.</p></div>
   </div>
 </section>
@@ -131,7 +133,10 @@
   <div class="chips" id="surfaceChips">
     <button type="button" class="chip" data-en="Shirt / hoodie" data-es="Playera / sudadera">Shirt / hoodie</button>
     <button type="button" class="chip" data-en="Hat / cap" data-es="Gorra">Hat / cap</button>
+    <button type="button" class="chip" data-en="Cards" data-es="Tarjetas">Cards</button>
+    <button type="button" class="chip" data-en="Socks" data-es="Calcetines">Socks</button>
     <button type="button" class="chip" data-en="Sign / banner" data-es="Letrero / pancarta">Sign / banner</button>
+    <button type="button" class="chip" data-en="Work uniforms" data-es="Uniformes de trabajo">Work uniforms</button>
     <button type="button" class="chip" data-en="Dog bandana" data-es="Bandana para perro">Dog bandana</button>
     <button type="button" class="chip" data-en="Something else" data-es="Otra cosa">Something else</button>
   </div>
@@ -314,6 +319,13 @@ function composeHear(){
   lines.push(L ? '— Next step: the artist hears this and sends back a concept to approve. —' : '— Siguiente paso: el artista escucha esto y manda un concepto para aprobar. —');
   var box = document.getElementById('hearSummary');
   box.textContent = lines.join('\n');
+  if(f && f.files && f.files.length){
+    var img = document.createElement('img');
+    img.src = URL.createObjectURL(f.files[0]);
+    img.alt = f.files[0].name;
+    img.style.cssText = 'display:block;max-width:230px;border-radius:12px;margin-top:12px;border:2px solid #39c24a';
+    box.appendChild(img);
+  }
   box.style.display='block';
   document.getElementById('hearCopy').style.display='inline-block';
   box.scrollIntoView({behavior:'smooth', block:'center'});
