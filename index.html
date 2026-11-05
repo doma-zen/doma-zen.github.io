@@ -41,6 +41,40 @@
 </nav>
 </header>
 <main style="max-width:720px;margin:0 auto;padding:20px 16px 32px;">
+<section id="foundations" style="background:#0f172a;border:1px solid #475569;border-radius:12px;padding:18px;margin:18px 0;">
+<h2>🏠 Our foundations — the mantra, in the middle</h2>
+<p style="font-size:18px;line-height:1.6;"><em>"We look inside — asking the insightful questions — to get the heart of your business out."</em></p>
+<p style="line-height:1.6;">We learn what you are, we show it back to you, you correct it, and we build only what you approve, in your own apartment. That is not a slogan. That is how every interaction works here.</p>
+<h3>🔄 The seven-stage interaction framework — tap to spin</h3>
+<p style="font-size:14px;color:#94a3b8;">One interaction, seven stages, around and around again as we learn. Tap Spin to walk through it.</p>
+<div style="text-align:center;">
+<div id="loop-detail" style="background:#1e293b;border-radius:10px;padding:14px;margin:10px 0;"><strong>Stage 1 — Interview</strong><br>Ask open-ended, in the right order, adjusted by the answer heard.</div>
+<button type="button" onclick="spinLoop()" style="padding:10px 18px;border-radius:8px;border:1px solid #22d3ee;background:#0e7490;color:#fff;font-weight:bold;">↻ Spin the loop</button>
+</div>
+<script>
+var loopStages=[
+"<strong>Stage 1 — Interview</strong><br>Ask open-ended, in the right order, adjusted by the answer heard.",
+"<strong>Stage 2 — Structure</strong><br>Organize what was heard into topics, frameworks, and knowledge.",
+"<strong>Stage 3 — Answer with confidence</strong><br>State it in bands: confident, split, or low. Never guess in voice.",
+"<strong>Stage 4 — Capture corrections</strong><br>The owner red-pens it. The correction is kept, with source and version.",
+"<strong>Stage 5 — Regression-test</strong><br>That correction becomes a test the system must pass next time.",
+"<strong>Stage 6 — Brief</strong><br>Show it all back in one organized Brief. Would you like me to email you the brief?",
+"<strong>Stage 7 — Never ask twice</strong><br>Ask once, remember everything. Never be Kapil."
+];
+var loopIdx=0;
+function spinLoop(){loopIdx=(loopIdx+1)%loopStages.length;document.getElementById('loop-detail').innerHTML=loopStages[loopIdx];}
+</script>
+<h3>🤝 The common framework — what everyone has to deal with</h3>
+<p style="line-height:1.6;">Every business, every trade, every team deals with the same five things. That is why one framework works across all of them. We learn best practices of interaction from these, over and over, in every apartment:</p>
+<ul style="font-size:15px;line-height:1.7;">
+<li><strong>Schedules</strong> — who, when, where, and what happens next.</li>
+<li><strong>People</strong> — owners, checkers, operators, customers, crews — and who does what.</li>
+<li><strong>Promises made</strong> — what was said, what was booked, what was agreed.</li>
+<li><strong>Promises kept</strong> — did it happen, on time, as agreed, with a record behind it?</li>
+<li><strong>Lessons learned</strong> — what worked, what broke, what we will do differently next time — kept as a test, not lost as a story.</li>
+</ul>
+<p style="font-size:13px;color:#94a3b8;">Sample framework only on this page. The seven-stage loop is the interaction framework; the five common threads above are what it learns from, in every industry.</p>
+</section>
 <section id="what" style="background:#1e293b;border:1px solid #334155;border-radius:14px;padding:18px;margin-bottom:16px;">
 <h2 style="margin:0 0 8px;">What we do — a business intro</h2>
 <p style="line-height:1.6;font-size:17px;"><strong>For business owners:</strong> your phone gets answered right, the right person gets the job, and the promise you made gets kept — every time, even when you're on another job.</p>
@@ -401,6 +435,7 @@ function callStep(n) {  var el = document.getElementById('call-steps');
 <footer style="text-align:center;padding:18px;font-size:14px;color:#cbd5e1;">
 <a href="privacy-policy.html" style="color:#22d3ee;margin:0 10px;">Privacy Policy</a>
 <a href="terms-and-conditions.html" style="color:#22d3ee;margin:0 10px;">Terms and Conditions</a>
+<p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">Version 1.1 — Last updated November 05, 2026, 12:03 AM EST — in version control, GitHub doma-zen.github.io, main. <a href="versioning-methodology.html" style="color:#22d3ee;">How versions work</a></p>
 <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No names or phone numbers on this site.</p>
 </footer>
 </body>

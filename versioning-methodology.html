@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Doma Versioning Methodology</title></head><body style="background:#0f172a;color:#e2e8f0;font-family:system-ui,sans-serif;max-width:720px;margin:0 auto;padding:20px 16px 32px;line-height:1.6;">
+<p><a href="index.html" style="color:#22d3ee;">← Back to Doma Mantra</a></p>
+<h1>Doma Versioning Methodology — DRAFT, for Mike's rule</h1>
+<p>Plain words, consistent, for the website and for every product and sub-component that follows it.</p>
+<h2>The number: Major . Minor . Patch</h2>
+<p>Example: 1.1.0, 1.2.0, 2.0.0. The footer shows Major.Minor, plus date, daytime, and commit hash at publish time. The full three-part number lives in the commit message and the changelog.</p>
+<h2>What knocks a version</h2>
+<h3>Patch — 1.1.0 → 1.1.1 — a slight change</h3>
+<p>• One line, a typo, a color, a leaked builder note, a footer fix.</p>
+<p>• Nothing new, nothing removed, nothing a visitor has to relearn.</p>
+<p>• Example: deleting the leaked "cartoonish business icon" line alone = 1.1.1.</p>
+<h3>Minor — 1.1 → 1.2 → 1.3 → 1.4 — a new piece, same foundation</h3>
+<p>• A new section, a new feature, a new sample, a new wheel — built on the same foundation, no breaking change, same framework, same principles.</p>
+<p>• Example: Foundations on the front page = 1.1. Zones & Tracking added = 1.2. Directions added = 1.3.</p>
+<p>• Minor bumps are the steady run: 1.1, 1.2, 1.3, 1.4, in order, each with a date and a reason.</p>
+<h3>Major — 1.0 → 2.0 — a fundamental change</h3>
+<p>A major bump happens when ANY of these is true, even if the change looks small on the page:</p>
+<p>1. **A new framework** — the thing is built on a new framework, or a sub-component moves to a new framework.</p>
+<p>2. **A fundamental good principle** — a new principle that changes how the system works, or how it must be judged. Example: "every event ledgered," "ask once, remember everything," "business intelligence never sold" — if a new principle like that is added, or an old one is changed, that's major.</p>
+<p>3. **A revamp** — a whole section, product, or site is rebuilt, not just added to.</p>
+<p>4. **A new launch of something** — a new product, a new component, a new service that stands on its own, even if it plugs into the same house.</p>
+<p>5. **A breaking change** — old behaviour, old links, old promises no longer work the same way.</p>
+<p>Examples, ruled in plain words:</p>
+<p>• Live website ingestion actually wired — visitor submits a site, Brief comes back, in a real tenant apartment — that's a new foundation. That's 2.0.</p>
+<p>• **I Have / I Want — that's a new launch.** A new exchange, a new matchmaking service, products, connections, and relationships, what you have matched to what you want. That's not a section added to 1.x. That's 2.0, because it's a new launch of something.</p>
+<p>• A new product built on a new framework, or a quantity of products / sub-components all moving to a new framework together — that's major, not a string of minors.</p>
+<h2>Quantity does not hide a major</h2>
+<p>Ten small sections added together do not stay minor if together they are a revamp, a new framework, or a new launch. Count the pieces, but judge the whole: if the whole is a new foundation, a new principle, or a new launch, bump major, and say so.</p>
+<h2>A / B are not versions</h2>
+<p>A and B are test variants of the SAME version. Example: v1.1A = hero with Report Card first, v1.1B = hero with Chauffeur first. The winner becomes v1.1. The loser is dropped, in version control. No A/B ever becomes live without Mike picking it.</p>
+<h2>Rule for every bump, no exceptions</h2>
+<p>Every version, in the footer and in the commit message, says four things:</p>
+<p>1. Version number, and why THAT bump — patch, minor, or major, naming the rule above that triggered it.</p>
+<p>2. Date and daytime, public.</p>
+<p>3. What changed, plainly.</p>
+<p>4. Why we changed it.</p>
+<p>Example footer line:</p>
+<blockquote>Version 1.1 — Last updated November 5, 2026, [daytime] — Commit [hash] — Foundations added to front page, because that's our foundation, and it was missing from the first cut.</blockquote>
+<h2>Starting point, for the record</h2>
+<p>• v1.0 — November 4, 2026 — First live cut, domamantra.com, GitHub Pages, commit daef2502…</p>
+<p>• v1.1 — Staged, not yet live — Foundations on front page (mantra, seven-stage wheel, five common threads) + version footer. Minor bump: new section, same foundation.</p>
+<p>• Next major, already named: I Have / I Want launch = 2.0, when it launches as a real service, not a sample section.</p>
+<hr>
+<p>Draft only, for Mike's rule. Nothing on this page is published to the live site until Mike says so.</p>
+
+<p style="font-size:13px;color:#94a3b8;">Version 1.1 — Last updated November 05, 2026, 12:03 AM EST. No names or phone numbers on this site.</p>
+</body></html>
