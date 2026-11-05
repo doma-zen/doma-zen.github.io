@@ -207,11 +207,11 @@ function spinLoop(){loopIdx=(loopIdx+1)%loopStages.length;document.getElementByI
 <option value="elise" selected>Elise — female (default)</option>
 <option value="matt">Matt — male</option>
 <option value="emma">Emma — female</option>
-<option value="other-language" disabled>Other language — coming, language to choose</option>
+<option value="antonio">Antonio — male, Spanish (showcase)</option>
 </select></label>
 <button type="button" onclick="franklinSpeak()" style="padding:8px 10px;margin:0 6px 6px 0;border-radius:999px;border:0;background:#22d3ee;color:#082f49;font-weight:bold;">🔊 Hear Franklin (sample voice)</button>
 </p>
-<p style="font-size:13px;color:#94a3b8;margin:6px 0 0;">Pick a voice, then tap Hear. Names only on this page — no voice IDs here. The live voices are read from the key store on the server, not from this page. Sample wording only, in the shop's tone. The “hear” button uses your browser's built-in voice — it is <em>not</em> the shop owner's cloned voice, and it is not yet the ElevenLabs voice. No voice clone is made or used without the owner's own approval.</p>
+<p style="font-size:13px;color:#94a3b8;margin:6px 0 0;">Pick a voice, then tap Hear. <strong>Default voice: Elise — ElevenLabs, female, default.</strong> Names only on this page — no voice IDs, no API keys here. The live voices are read from the key store on the server, not from this page. The “hear” button plays a pre-generated ElevenLabs audio file for the selected voice when one exists (franklin-elise.mp3 for Elise, franklin-matt.mp3, franklin-emma.mp3, franklin-antonio.mp3 for Antonio (Spanish)), and falls back to your browser's built-in voice only while that file is still being generated. Franklin talks like the voice you pick. No voice clone is made or used without the owner's own approval.</p>
 </div>
 <div style="background:#0f172a;border:1px solid #475569;border-radius:10px;padding:14px;"><strong>🎁 Gift cards — ownership and trust, back and forth</strong><p style="font-size:14px;color:#cbd5e1;margin:6px 0 0;">A gift card is prepaid value the customer already owns — not a promise, not a coupon that might vanish. It is held on a ledger, it can be given to a friend, and every use is recorded, so both sides can see what is left. That is trust you can hand back and forth: the customer gives first, the business gives back with the treat, the friend comes in, and the relationship keeps going. Retention is not a discount trick — it is value owned, kept, and returned.</p><p style="font-size:13px;color:#94a3b8;margin:6px 0 0;">Sample description only. No amount, discount, or split is stated here — those are not settled, and no offer is made to any named shop on this page.</p><div style="background:#0f172a;border:1px solid #475569;border-radius:10px;padding:14px;"><strong>📅 The smart booking — questions answered, then booked</strong><p style="font-size:14px;color:#cbd5e1;margin:6px 0 0;">Visitor: “What time do you close, and can I book tomorrow morning?”<br>Chauffeur: “We close at 6. Tomorrow at 9 is open — shall I book you in? You will get a text and an email to confirm.”</p></div>
 <div style="background:#0f172a;border:1px solid #475569;border-radius:10px;padding:14px;"><strong>📞 The phone call — pick it up, live</strong><p style="font-size:14px;color:#cbd5e1;margin:6px 0 0;">Same conversation, on the phone. Tap the steps in order — sample only, this page does not dial. A call comes in, the Chauffeur greets and answers from what the business taught it. No voicemail maze, no “press 9.” If it cannot answer, it says so plainly and hands off warm.</p>
@@ -438,9 +438,17 @@ function franklinSay(key) {
   chat.innerHTML += '<p style="margin:0 0 8px;"><strong>You:</strong> ' + q + '</p><p style="margin:0 0 8px;"><strong>Franklin:</strong> ' + lastFranklin + '</p>';
 }
 function franklinSpeak() {
-  if (!('speechSynthesis' in window)) { alert('Sample voice is not available in this browser.'); return; }
-  window.speechSynthesis.cancel();
   var picked = (document.getElementById('voice-select') || {}).value || 'elise';
+  var audioFile = 'franklin-' + picked + '.mp3';
+  var audio = new Audio(audioFile);
+  audio.oncanplay = function() { audio.play(); };
+  audio.onerror = function() { franklinSpeakBrowser(picked); };
+  audio.load();
+  return;
+}
+function franklinSpeakBrowser(picked) {
+  if (!('speechSynthesis' in window)) { alert('Sample voice is not available in this browser. The ElevenLabs audio file for ' + picked + ' is not generated yet.'); return; }
+  window.speechSynthesis.cancel();
   var u = new SpeechSynthesisUtterance(lastFranklin);
   var voices = window.speechSynthesis.getVoices() || [];
   var en = voices.filter(function(v){ return (v.lang || '').toLowerCase().indexOf('en') === 0; });
@@ -453,7 +461,10 @@ function franklinSpeak() {
     if (!wantMale && /(female|samantha|zira|karen|moira|google us english)/.test(n)) { found = pool[i]; break; }
   }
   if (found) { u.voice = found; }
-  if (wantMale) { u.pitch = 0.85; u.rate = 0.95; } else { u.pitch = 1.05; u.rate = 1.0; }
+  if (picked === 'antonio') { u.pitch = 0.9; u.rate = 0.92; u.lang = 'es-ES'; }
+  else if (picked === 'matt') { u.pitch = 0.85; u.rate = 0.95; }
+  else if (picked === 'emma') { u.pitch = 1.1; u.rate = 1.0; }
+  else { u.pitch = 1.05; u.rate = 1.0; }
   window.speechSynthesis.speak(u);
 }
 var showcaseItems = [
@@ -497,7 +508,7 @@ function callStep(n) {  var el = document.getElementById('call-steps');
 <footer style="text-align:center;padding:18px;font-size:14px;color:#cbd5e1;">
 <a href="privacy-policy.html" style="color:#22d3ee;margin:0 10px;">Privacy Policy</a>
 <a href="terms-and-conditions.html" style="color:#22d3ee;margin:0 10px;">Terms and Conditions</a>
-<p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">Version 1.6 — Last updated November 05, 2026, 3:33 AM EST — in version control, GitHub doma-zen.github.io, main. <a href="versioning-methodology.html" style="color:#22d3ee;">How versions work</a></p>
+<p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">Version 1.7 — Last updated November 05, 2026, 11:00 AM EST — in version control, GitHub doma-zen.github.io, main. <a href="versioning-methodology.html" style="color:#22d3ee;">How versions work</a></p>
 <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No names or phone numbers on this site.</p>
 </footer>
 </body>
