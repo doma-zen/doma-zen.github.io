@@ -1,0 +1,26 @@
+# Doma Mantra
+
+> Doma Mantra is an Interaction Center for local service businesses. It learns a business by asking the right questions, builds a knowledge base the business owns, and then uses that knowledge to answer the business's customers, book the next step, and keep the business's promises across its website, text, chat, email, and phone.
+
+## What it does
+
+- Learns a business by asking questions and reading its website. The owner sees the review and approves what the system learned before anything goes live.
+- Answers customers on web, text, chat, email, and phone, all from the one knowledge base. A person takes over whenever an answer is not clear.
+- Books the next step and follows up. Every interaction is recorded.
+- Reports monthly on a Promises Index card: callbacks made, emails sent, questions answered, situations handled, situations recovered, gift cards used, customers who came back, and promises kept out of promises made.
+
+## Who it serves
+
+Local service businesses, the owner-operated shops and trades whose answers live in the owner's head and whose customers have to repeat themselves. The business examples shown on the website are illustrative examples, not customer claims.
+
+## Pricing
+
+There are no published rates. Pricing depends on the size of the business, the thresholds the owner sets, and how many transactions are counted in a month. The monthly Promises Index card is the count the pricing follows.
+
+## Contact
+
+Contact runs through the starter Brief request form on the website. There is no published phone number, by design.
+
+## Links
+
+- [Doma Mantra](https://domamantra.com/): the home page, with the offer, how it works, the sample report card, and the starter Brief form.

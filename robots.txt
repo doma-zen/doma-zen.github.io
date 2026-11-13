@@ -1,0 +1,24 @@
+# domamantra.com — crawl policy: open for discovery.
+# Every crawler, including the AI discovery bots, is welcome on the whole site.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://domamantra.com/sitemap.xml
