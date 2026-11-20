@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" href="data:," />
+<title>Franklin, the Mantra Avatar (Concept)</title>
+<style>
+  :root{
+    --bg:#0B1120;
+    --bg2:#121A2E;
+    --panel:#131E35;
+    --panel2:#0F1830;
+    --line:#243252;
+    --line-soft:#1C2947;
+    --cobalt:#1D3FBF;
+    --cobalt-bright:#2E5BFF;
+    --cyan:#2DD4EE;
+    --text:#F2F5FB;
+    --muted:#B9C4DC;
+    --muted2:#8FA0BE;
+    --good:#3ED6A5;
+    --warn:#F5B84C;
+    --rec:#FF6B6B;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: ui-sans-system, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cyan)}
+  button, input{font:inherit}
+  button{cursor:pointer}
+  :focus-visible{outline:2px solid var(--cyan); outline-offset:2px}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:20px 18px 48px}
+
+  /* Top bar */
+  .topbar{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; padding:6px 0 18px}
+  .brandline{display:flex; align-items:center; gap:12px}
+  .mark{width:38px; height:38px; flex:0 0 38px}
+  .brandline strong{font-size:15px; letter-spacing:.02em}
+  .brandline span{display:block; font-size:12.5px; color:var(--muted2); letter-spacing:.01em}
+  .concept-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid #6B4E12; background:#2A2110; color:#F7CD72;
+    font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:8px 12px; border-radius:999px; min-height:36px;
+  }
+  .concept-tag::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--warn); flex:0 0 8px}
+
+  /* Intro */
+  .intro{padding:10px 0 22px; max-width:760px}
+  .intro h1{font-size:clamp(28px, 4.5vw, 42px); line-height:1.12; margin:0 0 12px; font-weight:750; letter-spacing:-.01em}
+  .intro h1 em{font-style:normal; color:var(--cyan)}
+  .intro p{margin:0; color:var(--muted); font-size:16.5px; max-width:640px}
+
+  /* Steps */
+  .steps-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin:8px 0 12px}
+  .steps-head h2{font-size:18px; margin:0; font-weight:700}
+  .steps-head p{margin:0; color:var(--muted2); font-size:13.5px}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:22px}
+  .step{
+    background:var(--bg2); border:1px solid var(--line-soft); border-radius:var(--radius);
+    padding:16px 16px 14px; display:flex; gap:14px; align-items:flex-start;
+  }
+  .step-num{
+    width:36px; height:36px; flex:0 0 36px; border-radius:10px;
+    background:var(--cobalt); color:#fff; display:grid; place-items:center;
+    font-weight:800; font-size:16px;
+  }
+  .step:nth-child(3) .step-num{background:#0E4A5C; color:var(--cyan); border:1px solid #155E75}
+  .step h3{margin:2px 0 4px; font-size:15.5px; line-height:1.3}
+  .step p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.5}
+  .promise-counts{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .promise-counts span{font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; border:1px solid var(--line); color:var(--muted); padding:3px 8px; border-radius:999px}
+
+  /* Main grid */
+  .grid{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:16px; align-items:start}
+
+  .card{background:var(--bg2); border:1px solid var(--line-soft); border-radius:18px; overflow:hidden}
+  .card-head{padding:18px 18px 14px; border-bottom:1px solid var(--line-soft); display:flex; gap:16px; align-items:flex-start}
+
+  /* Franklin stage */
+  .frank-stage{position:relative; width:148px; height:148px; flex:0 0 148px}
+  .frank-frame{
+    position:absolute; inset:0; border-radius:22px;
+    background:radial-gradient(circle at 50% 34%, #1D3263 0%, #14234A 58%, #0F1830 100%);
+    border:1px solid #2A4A6B; overflow:visible;
+  }
+  .frank-svg{position:absolute; inset:2px; width:144px; height:144px; transform-origin:50% 88%}
+  .frank-stage.is-talking .frank-svg{animation:headSway 1.7s ease-in-out infinite}
+  @keyframes headSway{0%,100%{transform:rotate(0deg)}30%{transform:rotate(1.7deg)}65%{transform:rotate(-1.5deg)}}
+  .frank-stage.is-barking .frank-svg{animation:barkBounce .42s ease-in-out 2}
+  @keyframes barkBounce{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(0)}}
+  .ear{transform-box:fill-box; transform-origin:50% 8%}
+  .frank-stage.is-talking .ear-l{animation:earBounce .85s ease-in-out infinite}
+  .frank-stage.is-talking .ear-r{animation:earBounce .85s ease-in-out .18s infinite}
+  @keyframes earBounce{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-4deg)}}
+  #tail{transform-box:fill-box; transform-origin:0% 100%}
+  .frank-stage.is-talking #tail, .frank-stage.is-barking #tail{animation:tailWag .45s ease-in-out infinite}
+  @keyframes tailWag{0%,100%{transform:rotate(0deg)}50%{transform:rotate(13deg)}}
+  .woof-bubble{
+    position:absolute; top:-14px; right:-30px; z-index:3;
+    background:#FFFFFF; color:#14213D; font-weight:800; font-size:14px; line-height:1.3;
+    padding:8px 12px; border-radius:14px; max-width:190px;
+    opacity:0; transform:scale(.7) translateY(6px); pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  .woof-bubble::after{
+    content:""; position:absolute; left:18px; bottom:-7px; width:14px; height:14px;
+    background:#FFFFFF; transform:rotate(45deg); border-radius:2px;
+  }
+  .woof-bubble.show{opacity:1; transform:scale(1) translateY(0)}
+
+  .nameplate{flex:1; min-width:0}
+  .nameplate h2{margin:0; font-size:24px; line-height:1.1; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  .status{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--good); border:1px solid #174636; background:#0E2A22; padding:4px 9px; border-radius:999px}
+  .status i{width:7px; height:7px; border-radius:50%; background:var(--good); display:block}
+  .nameplate p{margin:6px 0 0; color:var(--muted); font-size:14px; max-width:520px}
+  .fineprint{margin-top:10px; display:flex; flex-direction:column; gap:5px}
+  .fineprint p{margin:0; font-size:12px; color:var(--muted2); line-height:1.5; max-width:520px}
+  .fineprint p.note-warn{color:#EAD9A8}
+  .sound-row{margin-top:12px}
+  .sound-toggle{
+    display:inline-flex; align-items:center; gap:9px;
+    min-height:44px; padding:10px 16px; border-radius:999px;
+    border:1px solid var(--cyan); background:#0E2A38; color:var(--text);
+    font-size:14px; font-weight:700;
+  }
+  .sound-toggle svg{width:19px; height:19px; flex:0 0 19px}
+  .sound-toggle .dot{width:9px; height:9px; border-radius:50%; background:var(--good); flex:0 0 9px}
+  .sound-toggle.off{border-color:var(--line); background:var(--panel2); color:var(--muted)}
+  .sound-toggle.off .dot{background:var(--muted2)}
+
+  .thread{padding:16px 18px 6px; display:flex; flex-direction:column; gap:12px; min-height:200px}
+  .msg{max-width:92%; padding:12px 14px; border-radius:14px; font-size:14.5px; line-height:1.55}
+  .msg .who{display:block; font-size:11px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; margin-bottom:5px}
+  .msg.mantra{background:var(--panel); border:1px solid var(--line-soft); align-self:flex-start; border-bottom-left-radius:4px}
+  .msg.mantra .who{color:var(--cyan)}
+  .msg.visitor{background:var(--cobalt); color:#fff; align-self:flex-end; border-bottom-right-radius:4px}
+  .msg.visitor .who{color:#BFD0FF}
+  .msg.followup{border-color:#2A4A6B; background:#12233F}
+  .msg p{margin:0}
+  .msg p + p{margin-top:8px}
+
+  .heard-box{
+    margin:12px 18px 0; border:1px solid #155E75; background:#0C2233;
+    border-radius:12px; padding:11px 13px;
+  }
+  .heard-box[hidden]{display:none}
+  .heard-box .heard-label{font-size:11.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--cyan); margin:0 0 4px}
+  .heard-box .heard-text{margin:0; font-size:15px; color:var(--text)}
+
+  .askback{padding:4px 18px 0}
+  .askback[hidden]{display:none}
+  .askback-label{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted2); margin:8px 0 8px}
+  .option-row{display:flex; flex-wrap:wrap; gap:8px}
+  .option-btn{
+    min-height:40px; padding:9px 14px; border-radius:999px;
+    border:1px solid #2E5BFF; background:#16265A; color:#DCE7FF;
+    font-size:13.5px; font-weight:600;
+  }
+  .option-btn:hover{background:#1D3FBF; color:#fff}
+
+  .composer{padding:14px 18px 18px; border-top:1px solid var(--line-soft); margin-top:12px}
+  .chips-label{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted2); margin:0 0 9px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px}
+  .chip{
+    min-height:40px; padding:9px 14px; border-radius:999px;
+    border:1px solid var(--line); background:var(--panel2); color:var(--text);
+    font-size:13.5px; font-weight:600; text-align:left;
+  }
+  .chip:hover{border-color:var(--cyan); color:var(--cyan)}
+  .way-label{display:flex; align-items:center; gap:10px; margin:0 0 9px}
+  .way-label .way-num{
+    width:24px; height:24px; flex:0 0 24px; border-radius:8px; background:var(--cobalt);
+    color:#fff; display:grid; place-items:center; font-size:13px; font-weight:800;
+  }
+  .way-label span{font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+  .input-row{display:flex; gap:8px}
+  .input-row input{
+    flex:1; min-width:0; min-height:46px; padding:11px 14px;
+    border-radius:12px; border:1px solid var(--line); background:#0B1428; color:var(--text);
+    font-size:15px;
+  }
+  .input-row input::placeholder{color:#6E7FA0}
+  .ask-btn{
+    min-height:46px; padding:11px 20px; border-radius:12px; border:0;
+    background:var(--cyan); color:#06202B; font-weight:800; font-size:15px; flex:0 0 auto;
+  }
+  .ask-btn:hover{background:#5FE3F5}
+
+  .or-divider{display:flex; align-items:center; gap:12px; margin:18px 0 14px; color:var(--muted2); font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase}
+  .or-divider::before, .or-divider::after{content:""; flex:1; height:1px; background:var(--line-soft)}
+
+  .mic-btn{
+    display:flex; align-items:center; gap:13px; width:100%;
+    min-height:58px; padding:12px 16px; border-radius:14px;
+    border:1px solid #2E5BFF; background:#16265A; color:#fff;
+    font-size:15.5px; font-weight:700; text-align:left;
+  }
+  .mic-btn:hover{background:#1D3FBF}
+  .mic-btn .mic-icon{
+    width:38px; height:38px; flex:0 0 38px; border-radius:50%;
+    background:var(--cyan); display:grid; place-items:center;
+  }
+  .mic-btn .mic-icon svg{width:19px; height:19px}
+  .mic-btn small{display:block; font-size:12.5px; font-weight:500; color:#BFD0FF; margin-top:1px}
+  .mic-btn.recording{border-color:var(--rec); background:#3A1626}
+  .mic-btn.recording .mic-icon{background:var(--rec); animation:micPulse 1.1s ease-in-out infinite}
+  @keyframes micPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+
+  .listen-bar{
+    margin-top:12px; border:1px solid #6E2434; background:#2A1019; border-radius:12px;
+    padding:11px 13px; display:flex; align-items:center; gap:12px;
+  }
+  .listen-bar[hidden]{display:none}
+  .rec-dot{width:11px; height:11px; flex:0 0 11px; border-radius:50%; background:var(--rec); animation:micPulse 1s ease-in-out infinite}
+  .listen-bar p{margin:0; font-size:13.5px; color:#F3C1C1; flex:1}
+  .count-circle{
+    width:40px; height:40px; flex:0 0 40px; border-radius:50%;
+    border:2px solid var(--rec); color:#fff; display:grid; place-items:center;
+    font-size:18px; font-weight:800;
+  }
+  .recog-note{
+    margin-top:12px; border:1px solid #6B4E12; background:#221B0E; border-radius:12px;
+    padding:11px 13px; font-size:13.5px; color:#EAD9A8; line-height:1.5;
+  }
+  .recog-note[hidden]{display:none}
+  .talk-status{margin:10px 0 0; font-size:13px; color:var(--muted2)}
+  .talk-status[hidden]{display:none}
+  .composer-note{margin:12px 0 0; font-size:12.5px; color:var(--muted2)}
+
+  /* Learned panel */
+  .learned{position:sticky; top:16px}
+  .learned-inner{padding:18px}
+  .learned h2{margin:0; font-size:17px; line-height:1.3}
+  .learned .sub{margin:6px 0 0; color:var(--muted); font-size:13.5px}
+  .score-row{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:16px 0 4px}
+  .score{background:var(--panel2); border:1px solid var(--line-soft); border-radius:12px; padding:10px 8px; text-align:center}
+  .score b{display:block; font-size:22px; line-height:1; color:var(--text)}
+  .score span{display:block; margin-top:5px; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted2)}
+  .score.kept b{color:var(--good)}
+  .score.unsure b{color:var(--warn)}
+  .lsection{border-top:1px solid var(--line-soft); padding:14px 0 2px; margin-top:12px}
+  .lsection h3{margin:0 0 8px; font-size:12px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; display:flex; align-items:center; gap:8px}
+  .lsection h3::before{content:""; width:8px; height:8px; border-radius:2px; background:var(--cobalt-bright); flex:0 0 8px}
+  .lsection.answered h3::before{background:var(--good)}
+  .lsection.unsure h3::before{background:var(--warn)}
+  .lsection.profile h3::before{background:var(--cyan)}
+  .llist{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px}
+  .llist li{font-size:13.5px; color:var(--muted); background:var(--panel2); border:1px solid var(--line-soft); border-radius:10px; padding:8px 11px; line-height:1.45}
+  .llist li strong{color:var(--text); font-weight:650}
+  .empty{font-size:13.5px; color:var(--muted2); margin:0; padding:2px 0 6px}
+  .owner-note{margin-top:14px; border:1px solid #6B4E12; background:#221B0E; border-radius:12px; padding:12px 13px; font-size:13px; color:#EAD9A8; line-height:1.5}
+  .owner-note strong{color:#F7CD72}
+  .owner-note[hidden]{display:none}
+  .reset-row{margin-top:16px}
+  .reset-btn{min-height:40px; padding:9px 14px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--muted); font-size:13.5px; font-weight:600}
+  .reset-btn:hover{color:var(--text); border-color:var(--muted2)}
+
+  footer{margin-top:26px; border-top:1px solid var(--line-soft); padding-top:16px; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between}
+  footer p{margin:0; font-size:12.5px; color:var(--muted2); max-width:640px}
+
+  @media (prefers-reduced-motion: reduce){
+    .frank-stage.is-talking .frank-svg,
+    .frank-stage.is-barking .frank-svg,
+    .frank-stage.is-talking .ear-l,
+    .frank-stage.is-talking .ear-r,
+    .frank-stage.is-talking #tail,
+    .frank-stage.is-barking #tail,
+    .mic-btn.recording .mic-icon,
+    .rec-dot{animation:none}
+    html{scroll-behavior:auto}
+  }
+
+  @media (max-width:860px){
+    .steps{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr}
+    .learned{position:static}
+    .msg{max-width:96%}
+    .input-row{flex-wrap:wrap}
+    .input-row input{flex:1 1 100%}
+    .ask-btn{flex:1 1 auto}
+  }
+  @media (max-width:560px){
+    .card-head{flex-direction:column; align-items:center; text-align:center}
+    .nameplate h2{justify-content:center}
+    .fineprint p{margin-left:auto; margin-right:auto}
+    .woof-bubble{right:-8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brandline">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="10" fill="#1D3FBF"/><path d="M11 22 L20 13 L29 22" fill="none" stroke="#2DD4EE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 22 V28.5 H25.5 V22" fill="none" stroke="#F2F5FB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <strong>Doma Mantra</strong>
+        <span>Public avatar, concept page</span>
+      </div>
+    </div>
+    <span class="concept-tag">Concept, sample content</span>
+  </div>
+
+  <section class="intro">
+    <h1>A visitor asks. <em>Franklin answers</em> from what he learned.</h1>
+    <p>This is a working sample of the public face, and the face is Franklin. Type a question, or press the microphone and talk. Franklin answers out loud from the business's own material, asks a question back, and shows his work as he goes.</p>
+  </section>
+
+  <div class="steps-head">
+    <h2>How the Mantra way works</h2>
+    <p>Three steps, in plain words.</p>
+  </div>
+  <section class="steps" aria-label="How the Mantra way works">
+    <article class="step">
+      <div class="step-num" aria-hidden="true">1</div>
+      <div>
+        <h3>Ask the right questions</h3>
+        <p>Mantra starts by asking the owner about the business, its customers, and the promises it makes.</p>
+      </div>
+    </article>
+    <article class="step">
+      <div class="step-num" aria-hidden="true">2</div>
+      <div>
+        <h3>Learn the business</h3>
+        <p>It learns from the owner's answers and the business's own documents, and it remembers them.</p>
+      </div>
+    </article>
+    <article class="step">
+      <div class="step-num" aria-hidden="true">3</div>
+      <div>
+        <h3>Count the promises</h3>
+        <p>Every promise is put on the record and counted, so nothing is left to memory.</p>
+        <div class="promise-counts"><span>Made</span><span>Kept</span><span>Corrected</span></div>
+      </div>
+    </article>
+  </section>
+
+  <div class="grid">
+
+    <!-- Conversation -->
+    <section class="card" aria-label="Talk with Franklin">
+      <div class="card-head">
+        <div class="frank-stage" id="frank-stage" aria-hidden="true">
+          <div class="frank-frame"></div>
+          <svg class="frank-svg" viewBox="0 0 200 190">
+            <!-- Tail, behind the head -->
+            <path id="tail" d="M146 140 C168 134 180 116 178 94" fill="none" stroke="#8A5A2B" stroke-width="12" stroke-linecap="round"/>
+            <!-- Ears -->
+            <g class="ear ear-l">
+              <path d="M58 42 C32 46 20 82 26 114 C29 133 47 136 55 119 C62 103 63 66 58 42 Z" fill="#8A5A2B"/>
+              <path d="M54 58 C40 62 33 86 36 106 C38 117 48 118 52 107 C56 95 57 74 54 58 Z" fill="#6E4520"/>
+            </g>
+            <g class="ear ear-r">
+              <path d="M142 42 C168 46 180 82 174 114 C171 133 153 136 145 119 C138 103 137 66 142 42 Z" fill="#8A5A2B"/>
+              <path d="M146 58 C160 62 167 86 164 106 C162 117 152 118 148 107 C144 95 143 74 146 58 Z" fill="#6E4520"/>
+            </g>
+            <!-- Head -->
+            <ellipse cx="100" cy="96" rx="63" ry="59" fill="#D9A05B"/>
+            <ellipse cx="76" cy="72" rx="20" ry="15" fill="#C98F45" opacity="0.55"/>
+            <!-- Eyes -->
+            <circle cx="77" cy="86" r="7" fill="#2A1B12"/>
+            <circle cx="123" cy="86" r="7" fill="#2A1B12"/>
+            <circle cx="79.5" cy="83.5" r="2.3" fill="#FFFFFF"/>
+            <circle cx="125.5" cy="83.5" r="2.3" fill="#FFFFFF"/>
+            <path d="M66 72 Q77 66 88 71" fill="none" stroke="#8A5A2B" stroke-width="3.4" stroke-linecap="round"/>
+            <path d="M112 71 Q123 66 134 72" fill="none" stroke="#8A5A2B" stroke-width="3.4" stroke-linecap="round"/>
+            <!-- Muzzle -->
+            <ellipse cx="100" cy="122" rx="31" ry="23" fill="#F3DDB4"/>
+            <circle cx="85" cy="126" r="1.7" fill="#B98D4F"/>
+            <circle cx="115" cy="126" r="1.7" fill="#B98D4F"/>
+            <circle cx="90" cy="132" r="1.5" fill="#B98D4F"/>
+            <circle cx="110" cy="132" r="1.5" fill="#B98D4F"/>
+            <!-- Nose -->
+            <path d="M88 108 Q100 101 112 108 Q113 119 100 121 Q87 119 88 108 Z" fill="#38220F"/>
+            <ellipse cx="95" cy="107" rx="4" ry="2.2" fill="#6B4A2E"/>
+            <!-- Mouth, opened and closed by the voice -->
+            <ellipse id="mouth" cx="100" cy="136" rx="11" ry="2.4" fill="#4A2418"/>
+            <ellipse id="tongue" cx="100" cy="139" rx="6" ry="0" fill="#E58AA5"/>
+            <!-- Collar -->
+            <path d="M57 146 Q100 168 143 146 L143 160 Q100 182 57 160 Z" fill="#2E5BFF"/>
+            <circle cx="100" cy="166" r="6.5" fill="#2DD4EE"/>
+            <circle cx="100" cy="166" r="2.4" fill="#0B1120"/>
+          </svg>
+          <div class="woof-bubble" id="woof-bubble">Woof!</div>
+        </div>
+        <div class="nameplate">
+          <h2>Franklin <span class="status"><i></i>Here now</span></h2>
+          <p>Franklin answers from the business's own material: its documents, its owner's answers, and what he has been taught. If he has not learned something yet, he says so.</p>
+          <div class="fineprint">
+            <p>Concept voice: your browser's built-in voice stands in. The real version speaks with the ElevenLabs voice the owner picks.</p>
+            <p>Talking into it here uses your browser's built-in recognition to show the shape. The real version runs our own speech recognition, tuned on our side.</p>
+            <p class="note-warn" id="speech-note" hidden>Speech is not available in this browser, so Franklin's answers stay text only here.</p>
+          </div>
+          <div class="sound-row">
+            <button type="button" class="sound-toggle" id="sound-toggle" aria-pressed="true">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z" fill="#2DD4EE"/><path class="sound-waves" d="M15.5 9.2a4 4 0 0 1 0 5.6M18 6.8a7.4 7.4 0 0 1 0 10.4" stroke="#2DD4EE" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span id="sound-toggle-label">Sound on</span>
+              <span class="dot" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="thread" id="thread" aria-live="polite">
+        <div class="msg mantra">
+          <span class="who">Franklin</span>
+          <p>Hello, I am Franklin. I answer questions about this business from what I have learned from it. Ask me about the gift card, the loyalty index, or how getting started works.</p>
+          <p>If I do not know an answer yet, I will tell you plainly, and your question goes to the owner so I can learn it.</p>
+        </div>
+      </div>
+
+      <div class="heard-box" id="heard-box" hidden>
+        <p class="heard-label">Here is what I heard</p>
+        <p class="heard-text" id="heard-text"></p>
+      </div>
+
+      <div class="askback" id="askback" hidden>
+        <p class="askback-label" id="askback-label">Franklin asks</p>
+        <div class="option-row" id="option-row"></div>
+      </div>
+
+      <div class="composer">
+        <p class="chips-label">Start with a topic</p>
+        <div class="chips">
+          <button type="button" class="chip" data-topic="gift">How does the gift card work?</button>
+          <button type="button" class="chip" data-topic="loyalty">What is the loyalty index?</button>
+          <button type="button" class="chip" data-topic="mantra">What does Mantra do?</button>
+          <button type="button" class="chip" data-topic="start">How do we start?</button>
+        </div>
+
+        <p class="way-label"><span class="way-num" aria-hidden="true">1</span><span>Type it in</span></p>
+        <form class="input-row" id="ask-form">
+          <label for="question-input" style="position:absolute; left:-9999px">Ask Franklin a question</label>
+          <input id="question-input" type="text" autocomplete="off" placeholder="Type your own question here" maxlength="240" />
+          <button type="submit" class="ask-btn">Ask</button>
+        </form>
+
+        <div class="or-divider" aria-hidden="true">Or</div>
+
+        <p class="way-label"><span class="way-num" aria-hidden="true">2</span><span>Talk into it</span></p>
+        <button type="button" class="mic-btn" id="mic-btn">
+          <span class="mic-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" fill="#06202B"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3" stroke="#06202B" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <span><span id="mic-btn-title">Press and talk to Franklin</span><small id="mic-btn-sub">He listens, shows you what he heard, then answers out loud.</small></span>
+        </button>
+        <div class="listen-bar" id="listen-bar" hidden>
+          <span class="rec-dot" aria-hidden="true"></span>
+          <p>Recording. Franklin is listening. He stops on his own after about three seconds of quiet.</p>
+          <span class="count-circle" id="count-num" aria-label="Seconds of quiet left before he stops">3</span>
+        </div>
+        <p class="talk-status" id="talk-status" hidden></p>
+        <div class="recog-note" id="recog-note" hidden>Voice recognition is not available in this browser, typing still works.</div>
+
+        <p class="composer-note">Sample answers only, written from sample business material for this concept page.</p>
+      </div>
+    </section>
+
+    <!-- Learned panel -->
+    <aside class="card learned" aria-label="What Franklin has learned so far">
+      <div class="learned-inner">
+        <h2>What I have learned so far</h2>
+        <p class="sub">No black box. You can see what came in, what Franklin answered, and what he is still unsure about.</p>
+
+        <div class="score-row" aria-label="This conversation, counted">
+          <div class="score"><b id="count-in">0</b><span>Came in</span></div>
+          <div class="score kept"><b id="count-answered">0</b><span>Answered</span></div>
+          <div class="score unsure"><b id="count-unsure">0</b><span>Unsure</span></div>
+        </div>
+
+        <div class="lsection profile">
+          <h3>About your business</h3>
+          <p class="empty" id="profile-empty">Nothing yet. Answer one of Franklin's questions and it will show up here.</p>
+          <ul class="llist" id="profile-list"></ul>
+        </div>
+
+        <div class="lsection">
+          <h3>What came in</h3>
+          <p class="empty" id="in-empty">No questions yet.</p>
+          <ul class="llist" id="in-list"></ul>
+        </div>
+
+        <div class="lsection answered">
+          <h3>What I answered</h3>
+          <p class="empty" id="answered-empty">Nothing answered yet.</p>
+          <ul class="llist" id="answered-list"></ul>
+        </div>
+
+        <div class="lsection unsure">
+          <h3>What I am unsure about</h3>
+          <p class="empty" id="unsure-empty">Nothing so far. If a question has no learned answer, it lands here.</p>
+          <ul class="llist" id="unsure-list"></ul>
+        </div>
+
+        <div class="owner-note" id="owner-note" hidden>
+          <strong>Sent to the owner.</strong> <span id="owner-note-text">A question above has no learned answer yet. The owner answers it once, and Franklin remembers it from then on.</span>
+        </div>
+
+        <div class="reset-row">
+          <button type="button" class="reset-btn" id="reset-btn">Start this sample over</button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <footer>
+    <p>Staged concept for review. The conversation above runs entirely on this page with scripted sample answers. No real business is connected to it.</p>
+    <p>Concept, sample content.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var ANSWERS = {
+    gift: {
+      label: "How does the gift card work?",
+      short: "The gift card",
+      text: [
+        "The gift card is part of a loyalty program. Each card is tracked from the day it is sold, so the owner can always see what is out there and what is still on it.",
+        "Its value pays out on real transactions, when a customer actually comes in and buys something. Nothing is counted on a promise alone, and nothing is counted twice."
+      ]
+    },
+    loyalty: {
+      label: "What is the loyalty index?",
+      short: "The loyalty index",
+      text: [
+        "The loyalty index is trust, counted. It is earned from real transactions and real referrals, people who came in, bought, and sent someone else in after them.",
+        "It is never given and never bought. When the count rises, the record shows why. When it dips, the record shows that too, so the owner can act on facts instead of feelings."
+      ]
+    },
+    mantra: {
+      label: "What does Mantra do?",
+      short: "What Mantra does",
+      text: [
+        "Mantra learns your business by asking the right questions, then answers your customers from what it learned, using your own material and your own words.",
+        "It also counts its promises: how many were made, how many were kept, and how many were missed and corrected. The owner sees the whole record."
+      ]
+    },
+    start: {
+      label: "How do we start?",
+      short: "How to start",
+      text: [
+        "You start by answering questions. Mantra asks about your business, your customers, and the promises you make, and it learns from your documents and your answers.",
+        "You answer each thing once. When Mantra does not know something, it says so and sends the question to you, so the next answer is better and nobody has to repeat themselves."
+      ]
+    }
+  };
+
+  var UNKNOWN_TEXT = [
+    "I do not know that yet, and I will not guess at it.",
+    "I have written your question down exactly as you asked it, and it goes to the owner. The owner answers it once, and I remember it from then on. That is how I learn."
+  ];
+
+  var FOLLOWUPS = [
+    {
+      id: "bizType",
+      field: "Kind of business",
+      question: "May I ask one back? What kind of business do you run?",
+      options: ["Restaurant or cafe", "Shop or retail", "A service business", "Health or care", "Something else"]
+    },
+    {
+      id: "firstJob",
+      field: "Help wanted first",
+      question: "Thank you. What would you want help with first?",
+      options: ["Answering common questions", "Taking bookings or orders", "Following up after a visit", "Counting promises kept"]
+    },
+    {
+      id: "channel",
+      field: "How customers reach you",
+      question: "One more, so I answer the right way. How do customers reach you most?",
+      options: ["By phone", "By text or message", "They walk in", "Through the website"]
+    }
+  ];
+
+  var thread = document.getElementById("thread");
+  var askback = document.getElementById("askback");
+  var optionRow = document.getElementById("option-row");
+  var form = document.getElementById("ask-form");
+  var input = document.getElementById("question-input");
+  var stage = document.getElementById("frank-stage");
+  var mouth = document.getElementById("mouth");
+  var tongue = document.getElementById("tongue");
+  var bubble = document.getElementById("woof-bubble");
+  var heardBox = document.getElementById("heard-box");
+  var heardText = document.getElementById("heard-text");
+
+  var state = {
+    cameIn: [],
+    answered: [],
+    unsure: [],
+    profile: [],
+    followIndex: 0,
+    awaitingFollow: false
+  };
+
+  var soundOn = true;
+  var greeted = false;
+
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if(cls) n.className = cls;
+    if(text != null) n.textContent = text;
+    return n;
+  }
+
+  function addMessage(who, paragraphs, extraCls){
+    var msg = el("div", "msg " + (who === "Franklin" ? "mantra" : "visitor") + (extraCls ? " " + extraCls : ""));
+    msg.appendChild(el("span", "who", who));
+    paragraphs.forEach(function(p){ msg.appendChild(el("p", null, p)); });
+    thread.appendChild(msg);
+    msg.scrollIntoView({block:"nearest", behavior:"smooth"});
+    return msg;
+  }
+
+  function renderList(listId, emptyId, items, format){
+    var list = document.getElementById(listId);
+    var empty = document.getElementById(emptyId);
+    list.innerHTML = "";
+    empty.style.display = items.length ? "none" : "";
+    items.forEach(function(item){
+      var li = document.createElement("li");
+      if(format){
+        var f = format(item);
+        li.appendChild(el("strong", null, f.head));
+        li.appendChild(document.createTextNode(f.rest));
+      } else {
+        li.textContent = item;
+      }
+      list.appendChild(li);
+    });
+  }
+
+  function render(){
+    document.getElementById("count-in").textContent = state.cameIn.length;
+    document.getElementById("count-answered").textContent = state.answered.length;
+    document.getElementById("count-unsure").textContent = state.unsure.length;
+
+    renderList("in-list", "in-empty", state.cameIn);
+    renderList("answered-list", "answered-empty", state.answered);
+    renderList("unsure-list", "unsure-empty", state.unsure);
+    renderList("profile-list", "profile-empty", state.profile, function(item){
+      return { head: item.field + ": ", rest: item.value };
+    });
+
+    var note = document.getElementById("owner-note");
+    if(state.unsure.length){
+      note.hidden = false;
+      document.getElementById("owner-note-text").textContent =
+        state.unsure.length === 1
+          ? "One question above has no learned answer yet. The owner answers it once, and Franklin remembers it from then on."
+          : state.unsure.length + " questions above have no learned answer yet. The owner answers each one once, and Franklin remembers them from then on.";
+    } else {
+      note.hidden = true;
+    }
+  }
+
+  function hideAskback(){
+    askback.hidden = true;
+    optionRow.innerHTML = "";
+    state.awaitingFollow = false;
+  }
+
+  function showFollowup(){
+    if(state.followIndex >= FOLLOWUPS.length){ hideAskback(); return; }
+    var f = FOLLOWUPS[state.followIndex];
+    addMessage("Franklin", [f.question], "followup");
+    optionRow.innerHTML = "";
+    f.options.forEach(function(opt){
+      var b = el("button", "option-btn", opt);
+      b.type = "button";
+      b.addEventListener("click", function(){ pickOption(f, opt); });
+      optionRow.appendChild(b);
+    });
+    askback.hidden = false;
+    state.awaitingFollow = true;
+  }
+
+  function pickOption(follow, value){
+    state.profile.push({ field: follow.field, value: value });
+    addMessage("You", [value]);
+    hideAskback();
+    state.followIndex += 1;
+    var thanks = "Noted, and thank you. " + follow.field + ": " + value + ". It is on the panel to your side, with everything else I have learned in this conversation.";
+    if(state.followIndex >= FOLLOWUPS.length){
+      thanks += " That is all I will ask for now. Press a topic any time and I will keep answering.";
+    }
+    addMessage("Franklin", [thanks]);
+    render();
+  }
+
+  /* ---------- Mouth sync ---------- */
+  var mouthTimer = null;
+
+  function setMouth(open){
+    mouth.setAttribute("ry", open.toFixed(1));
+    if(open > 6.5){
+      tongue.setAttribute("ry", (open - 4.5).toFixed(1));
+      tongue.setAttribute("cy", (136 + open * 0.55).toFixed(1));
+    } else {
+      tongue.setAttribute("ry", "0");
+    }
+  }
+
+  function startMouth(){
+    stopMouth();
+    var pauseUntil = 0;
+    mouthTimer = setInterval(function(){
+      var now = Date.now();
+      if(now < pauseUntil){ setMouth(2.2); return; }
+      if(Math.random() < 0.16){
+        pauseUntil = now + 180 + Math.random() * 260;
+        setMouth(2.2);
+        return;
+      }
+      setMouth(3 + Math.random() * 8.5);
+    }, 105);
+  }
+
+  function stopMouth(){
+    if(mouthTimer){ clearInterval(mouthTimer); mouthTimer = null; }
+    setMouth(2.4);
+  }
+
+  /* ---------- Speech out ---------- */
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var speakToken = 0;
+  var voiceWarned = false;
+
+  function warnVoice(){
+    if(voiceWarned) return;
+    voiceWarned = true;
+    var note = document.getElementById("speech-note");
+    note.textContent = "The built-in voice is not working in this browser, so Franklin's answers stay text only here. Try opening this page in Chrome to hear him.";
+    note.hidden = false;
+  }
+
+  if(!synth){
+    document.getElementById("speech-note").hidden = false;
+  }
+
+  /* Voices load late on many phones, and an utterance with no voice
+     chosen can play as silence. Warm the list, keep it warm, and
+     always pick a real voice before speaking. */
+  var voiceList = [];
+  function refreshVoices(){
+    if(!synth) return;
+    var v = synth.getVoices();
+    if(v && v.length) voiceList = v;
+  }
+  if(synth){
+    refreshVoices();
+    if("onvoiceschanged" in synth) synth.onvoiceschanged = refreshVoices;
+  }
+  function pickVoice(){
+    if(!voiceList.length) refreshVoices();
+    var en = null, i;
+    for(i = 0; i < voiceList.length; i++){
+      if(/^en([-_]|$)/i.test(voiceList[i].lang || "")){
+        if(/google/i.test(voiceList[i].name) && /us/i.test(voiceList[i].lang)) return voiceList[i];
+        if(!en) en = voiceList[i];
+      }
+    }
+    if(en) return en;
+    for(i = 0; i < voiceList.length; i++){ if(voiceList[i].default) return voiceList[i]; }
+    return voiceList[0] || null;
+  }
+
+  function speak(text){
+    if(!soundOn || !synth) return;
+    synth.cancel();
+    if(synth.resume) synth.resume();
+    var token = ++speakToken;
+    var started = false;
+    var u = new SpeechSynthesisUtterance(text);
+    u.rate = 1.02;
+    u.pitch = 1.08;
+    u.lang = "en-US";
+    var voice = pickVoice();
+    if(voice) u.voice = voice;
+    u.onstart = function(){
+      if(token !== speakToken) return;
+      started = true;
+      stage.classList.add("is-talking");
+      startMouth();
+    };
+    var done = function(){
+      if(token !== speakToken) return;
+      stage.classList.remove("is-talking");
+      stopMouth();
+    };
+    u.onend = done;
+    u.onerror = function(e){
+      done();
+      if(e && e.error && e.error !== "canceled" && e.error !== "interrupted") warnVoice();
+    };
+    synth.speak(u);
+    /* If the voice never starts, say so on the page instead of
+       leaving silence after the bark. */
+    setTimeout(function(){
+      if(token === speakToken && !started && !synth.speaking && !synth.pending) warnVoice();
+    }, 1600);
+    /* Watchdog: if the end event never arrives, rest the mouth anyway. */
+    var est = Math.min(30000, 2500 + text.length * 95);
+    setTimeout(function(){
+      if(token === speakToken && !synth.speaking && !synth.pending){
+        stage.classList.remove("is-talking");
+        stopMouth();
+      }
+    }, est);
+  }
+
+  function stopSpeaking(){
+    speakToken++;
+    if(synth) synth.cancel();
+    stage.classList.remove("is-talking");
+    stopMouth();
+  }
+
+  /* ---------- Bark ---------- */
+  var audioCtx = null;
+
+  function barkSound(){
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return;
+    try{
+      if(!audioCtx) audioCtx = new AC();
+      if(audioCtx.state === "suspended") audioCtx.resume();
+      var t0 = audioCtx.currentTime;
+      [0, 0.17].forEach(function(offset){
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        var filter = audioCtx.createBiquadFilter();
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(520, t0 + offset);
+        osc.frequency.exponentialRampToValueAtTime(170, t0 + offset + 0.1);
+        filter.type = "bandpass";
+        filter.frequency.value = 900;
+        filter.Q.value = 1.1;
+        gain.gain.setValueAtTime(0.0001, t0 + offset);
+        gain.gain.exponentialRampToValueAtTime(0.22, t0 + offset + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t0 + offset + 0.11);
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(t0 + offset);
+        osc.stop(t0 + offset + 0.13);
+      });
+    }catch(e){ /* sound is a garnish here, never a blocker */ }
+  }
+
+  var bubbleTimer = null;
+  function bark(kind){
+    if(!soundOn) return;
+    bubble.textContent = kind === "gift" ? "Woof! Gift cards are my favorite topic." : "Woof!";
+    stage.classList.remove("is-barking");
+    void stage.offsetWidth;
+    stage.classList.add("is-barking");
+    bubble.classList.add("show");
+    barkSound();
+    if(bubbleTimer) clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(function(){
+      stage.classList.remove("is-barking");
+      bubble.classList.remove("show");
+    }, 1250);
+  }
+
+  /* ---------- Answering ---------- */
+  function matchTopic(text){
+    var t = " " + text.toLowerCase() + " ";
+    if(/gift|card|certificate/.test(t)) return "gift";
+    if(/loyal|index|trust|referral|repeat/.test(t)) return "loyalty";
+    if(/start|begin|sign up|get going|onboard|setup|set up/.test(t)) return "start";
+    if(/mantra|what do you do|what does it do|who are you|your job/.test(t)) return "mantra";
+    return null;
+  }
+
+  function deliverAnswer(questionText, key){
+    state.cameIn.push(questionText);
+    if(key){
+      var a = ANSWERS[key];
+      state.answered.push(a.short + ", answered from learned material.");
+      addMessage("Franklin", a.text);
+      speak(a.text.join(" "));
+    } else {
+      state.unsure.push(questionText);
+      addMessage("Franklin", UNKNOWN_TEXT);
+      speak(UNKNOWN_TEXT.join(" "));
+    }
+    render();
+    if(!state.awaitingFollow){ showFollowup(); }
+  }
+
+  function handleQuestion(questionText, key){
+    addMessage("You", [questionText]);
+    var barkKind = null;
+    if(!greeted){ greeted = true; barkKind = "greet"; }
+    else if(key === "gift"){ barkKind = "gift"; }
+    if(barkKind && soundOn){
+      bark(barkKind);
+      setTimeout(function(){ deliverAnswer(questionText, key); }, 620);
+    } else {
+      deliverAnswer(questionText, key);
+    }
+  }
+
+  document.querySelectorAll(".chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      var key = chip.getAttribute("data-topic");
+      handleQuestion(chip.textContent.trim(), key);
+    });
+  });
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var q = input.value.trim();
+    if(!q) return;
+    input.value = "";
+    handleQuestion(q, matchTopic(q));
+  });
+
+  /* ---------- Sound toggle ---------- */
+  var soundToggle = document.getElementById("sound-toggle");
+  var soundLabel = document.getElementById("sound-toggle-label");
+  soundToggle.addEventListener("click", function(){
+    soundOn = !soundOn;
+    soundToggle.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    soundToggle.classList.toggle("off", !soundOn);
+    soundLabel.textContent = soundOn ? "Sound on" : "Sound off";
+    if(!soundOn){
+      stopSpeaking();
+      bubble.classList.remove("show");
+      stage.classList.remove("is-barking");
+    }
+  });
+
+  /* ---------- Talk into it: speech recognition ---------- */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  var micBtn = document.getElementById("mic-btn");
+  var micTitle = document.getElementById("mic-btn-title");
+  var micSub = document.getElementById("mic-btn-sub");
+  var listenBar = document.getElementById("listen-bar");
+  var countNum = document.getElementById("count-num");
+  var talkStatus = document.getElementById("talk-status");
+  var recogNote = document.getElementById("recog-note");
+
+  var recog = null;
+  var listening = false;
+  var finishing = false;
+  var lastHeardAt = 0;
+  var finalText = "";
+  var interimText = "";
+  var countInt = null;
+
+  if(!SR){
+    recogNote.hidden = false;
+  }
+
+  function setTalkStatus(text){
+    if(text){ talkStatus.textContent = text; talkStatus.hidden = false; }
+    else { talkStatus.hidden = true; talkStatus.textContent = ""; }
+  }
+
+  function showHeard(text){
+    heardText.textContent = text;
+    heardBox.hidden = false;
+  }
+
+  function startListeningUI(){
+    micBtn.classList.add("recording");
+    micTitle.textContent = "Listening now, tap to stop";
+    micSub.textContent = "Speak your question. Franklin writes down what he hears first.";
+    listenBar.hidden = false;
+    countNum.textContent = "3";
+    setTalkStatus("");
+  }
+
+  function stopListeningUI(){
+    micBtn.classList.remove("recording");
+    micTitle.textContent = "Press and talk to Franklin";
+    micSub.textContent = "He listens, shows you what he heard, then answers out loud.";
+    listenBar.hidden = true;
+    if(countInt){ clearInterval(countInt); countInt = null; }
+  }
+
+  function finishListening(){
+    if(finishing) return;
+    finishing = true;
+    listening = false;
+    stopListeningUI();
+    if(recog){ try{ recog.stop(); }catch(e){} }
+    var heard = (finalText + " " + interimText).trim().replace(/\s+/g, " ");
+    finalText = "";
+    interimText = "";
+    if(heard){
+      showHeard(heard);
+      setTalkStatus("That is what Franklin heard. He is answering it now.");
+      setTimeout(function(){
+        setTalkStatus("");
+        handleQuestion(heard, matchTopic(heard));
+      }, 750);
+    } else {
+      setTalkStatus("Franklin did not hear anything that time. Try again, or type your question above.");
+    }
+    setTimeout(function(){ finishing = false; }, 300);
+  }
+
+  function recogFailed(){
+    listening = false;
+    stopListeningUI();
+    if(recog){ try{ recog.abort(); }catch(e){} recog = null; }
+    recogNote.hidden = false;
+  }
+
+  micBtn.addEventListener("click", function(){
+    if(!SR){
+      recogNote.hidden = false;
+      recogNote.scrollIntoView({block:"nearest", behavior:"smooth"});
+      return;
+    }
+    if(listening){ finishListening(); return; }
+
+    greetedCheckForMic();
+    recog = new SR();
+    recog.lang = "en-US";
+    recog.interimResults = true;
+    recog.continuous = true;
+    recog.maxAlternatives = 1;
+    finalText = "";
+    interimText = "";
+    finishing = false;
+
+    recog.onresult = function(ev){
+      var fin = "", inter = "";
+      for(var i = 0; i < ev.results.length; i++){
+        var r = ev.results[i];
+        if(r.isFinal){ fin += r[0].transcript; }
+        else { inter += r[0].transcript; }
+      }
+      finalText = fin;
+      interimText = inter;
+      var combined = (fin + " " + inter).trim().replace(/\s+/g, " ");
+      if(combined){
+        lastHeardAt = Date.now();
+        showHeard(combined);
+      }
+    };
+    recog.onerror = function(ev){
+      if(ev.error === "aborted" || ev.error === "no-speech"){ return; }
+      recogFailed();
+    };
+    recog.onend = function(){
+      if(listening && !finishing){ finishListening(); }
+    };
+
+    try{
+      recog.start();
+    }catch(e){
+      recogFailed();
+      return;
+    }
+    listening = true;
+    lastHeardAt = Date.now();
+    startListeningUI();
+    countInt = setInterval(function(){
+      var left = 3000 - (Date.now() - lastHeardAt);
+      countNum.textContent = String(Math.max(0, Math.ceil(left / 1000)));
+      if(left <= 0){ finishListening(); }
+    }, 100);
+  });
+
+  function greetedCheckForMic(){
+    /* The mic press counts as a first interaction for sound setup, but the
+       greeting bark belongs to the first answer, so nothing extra happens here. */
+  }
+
+  /* ---------- Reset ---------- */
+  document.getElementById("reset-btn").addEventListener("click", function(){
+    state.cameIn = []; state.answered = []; state.unsure = []; state.profile = [];
+    state.followIndex = 0;
+    greeted = false;
+    stopSpeaking();
+    if(listening){ listening = false; stopListeningUI(); if(recog){ try{ recog.abort(); }catch(e){} } }
+    hideAskback();
+    heardBox.hidden = true;
+    heardText.textContent = "";
+    setTalkStatus("");
+    thread.innerHTML = "";
+    var msg = el("div", "msg mantra");
+    msg.appendChild(el("span", "who", "Franklin"));
+    msg.appendChild(el("p", null, "Hello, I am Franklin. I answer questions about this business from what I have learned from it. Ask me about the gift card, the loyalty index, or how getting started works."));
+    msg.appendChild(el("p", null, "If I do not know an answer yet, I will tell you plainly, and your question goes to the owner so I can learn it."));
+    thread.appendChild(msg);
+    render();
+    input.focus();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
