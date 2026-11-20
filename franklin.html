@@ -180,6 +180,7 @@
     font-size:13.5px; font-weight:600; text-align:left;
   }
   .chip:hover{border-color:var(--cyan); color:var(--cyan)}
+  .chip[aria-pressed="true"]{border-color:var(--cyan); color:var(--cyan); background:var(--panel)}
   .way-label{display:flex; align-items:center; gap:10px; margin:0 0 9px}
   .way-label .way-num{
     width:24px; height:24px; flex:0 0 24px; border-radius:8px; background:var(--cobalt);
@@ -433,7 +434,12 @@
       </div>
 
       <div class="composer">
-        <p class="chips-label">Start with a topic</p>
+        <p class="chips-label">Answers in · Respuestas en</p>
+        <div class="chips">
+          <button type="button" class="chip lang-btn" data-lang="en" aria-pressed="true">English</button>
+          <button type="button" class="chip lang-btn" data-lang="es" aria-pressed="false">Español</button>
+        </div>
+        <p class="chips-label" id="chips-label">Start with a topic</p>
         <div class="chips">
           <button type="button" class="chip" data-topic="gift">How does the gift card work?</button>
           <button type="button" class="chip" data-topic="loyalty">What is the loyalty index?</button>
@@ -531,34 +537,58 @@
   var ANSWERS = {
     gift: {
       label: "How does the gift card work?",
+      label_es: "¿Cómo funciona la tarjeta de regalo?",
       short: "The gift card",
+      short_es: "La tarjeta de regalo",
       text: [
         "The gift card is part of a loyalty program. Each card is tracked from the day it is sold, so the owner can always see what is out there and what is still on it.",
         "Its value pays out on real transactions, when a customer actually comes in and buys something. Nothing is counted on a promise alone, and nothing is counted twice."
+      ],
+      text_es: [
+        "La tarjeta de regalo es parte de un programa de lealtad. Cada tarjeta se registra desde el día en que se vende, así el dueño siempre puede ver cuántas hay y cuánto queda en cada una.",
+        "Su valor se usa en transacciones reales, cuando un cliente entra y compra algo. Nada se cuenta solo por una promesa, y nada se cuenta dos veces."
       ]
     },
     loyalty: {
       label: "What is the loyalty index?",
+      label_es: "¿Qué es el índice de lealtad?",
       short: "The loyalty index",
+      short_es: "El índice de lealtad",
       text: [
         "The loyalty index is trust, counted. It is earned from real transactions and real referrals, people who came in, bought, and sent someone else in after them.",
         "It is never given and never bought. When the count rises, the record shows why. When it dips, the record shows that too, so the owner can act on facts instead of feelings."
+      ],
+      text_es: [
+        "El índice de lealtad es la confianza, contada. Se gana con transacciones reales y recomendaciones reales: personas que entraron, compraron y después enviaron a alguien más.",
+        "Nunca se regala y nunca se compra. Cuando el conteo sube, el registro muestra por qué. Cuando baja, el registro también lo muestra, para que el dueño actúe con hechos y no con sentimientos."
       ]
     },
     mantra: {
       label: "What does Mantra do?",
+      label_es: "¿Qué hace Mantra?",
       short: "What Mantra does",
+      short_es: "Qué hace Mantra",
       text: [
         "Mantra learns your business by asking the right questions, then answers your customers from what it learned, using your own material and your own words.",
         "It also counts its promises: how many were made, how many were kept, and how many were missed and corrected. The owner sees the whole record."
+      ],
+      text_es: [
+        "Mantra aprende tu negocio haciendo las preguntas correctas, y luego responde a tus clientes con lo que aprendió, usando tu propio material y tus propias palabras.",
+        "También cuenta sus promesas: cuántas hizo, cuántas cumplió, y cuántas fallaron y se corrigieron. El dueño ve el registro completo."
       ]
     },
     start: {
       label: "How do we start?",
+      label_es: "¿Cómo empezamos?",
       short: "How to start",
+      short_es: "Cómo empezar",
       text: [
         "You start by answering questions. Mantra asks about your business, your customers, and the promises you make, and it learns from your documents and your answers.",
         "You answer each thing once. When Mantra does not know something, it says so and sends the question to you, so the next answer is better and nobody has to repeat themselves."
+      ],
+      text_es: [
+        "Empiezas respondiendo preguntas. Mantra pregunta sobre tu negocio, tus clientes y las promesas que haces, y aprende de tus documentos y de tus respuestas.",
+        "Respondes cada cosa una sola vez. Cuando Mantra no sabe algo, lo dice y te envía la pregunta, para que la próxima respuesta sea mejor y nadie tenga que repetirse."
       ]
     }
   };
@@ -568,24 +598,38 @@
     "I have written your question down exactly as you asked it, and it goes to the owner. The owner answers it once, and I remember it from then on. That is how I learn."
   ];
 
+  var UNKNOWN_TEXT_ES = [
+    "Todavía no sé eso, y no voy a adivinarlo.",
+    "Escribí tu pregunta exactamente como la hiciste, y va al dueño. El dueño la responde una vez, y yo la recuerdo desde entonces. Así es como aprendo."
+  ];
+
   var FOLLOWUPS = [
     {
       id: "bizType",
       field: "Kind of business",
+      field_es: "Tipo de negocio",
       question: "May I ask one back? What kind of business do you run?",
-      options: ["Restaurant or cafe", "Shop or retail", "A service business", "Health or care", "Something else"]
+      question_es: "¿Puedo preguntarte algo? ¿Qué tipo de negocio tienes?",
+      options: ["Restaurant or cafe", "Shop or retail", "A service business", "Health or care", "Something else"],
+      options_es: ["Restaurante o café", "Tienda o comercio", "Un negocio de servicios", "Salud o cuidado", "Otra cosa"]
     },
     {
       id: "firstJob",
       field: "Help wanted first",
+      field_es: "Ayuda primero con",
       question: "Thank you. What would you want help with first?",
-      options: ["Answering common questions", "Taking bookings or orders", "Following up after a visit", "Counting promises kept"]
+      question_es: "Gracias. ¿Con qué te gustaría ayuda primero?",
+      options: ["Answering common questions", "Taking bookings or orders", "Following up after a visit", "Counting promises kept"],
+      options_es: ["Responder preguntas comunes", "Tomar reservas o pedidos", "Dar seguimiento después de una visita", "Contar las promesas cumplidas"]
     },
     {
       id: "channel",
       field: "How customers reach you",
+      field_es: "Cómo te contactan los clientes",
       question: "One more, so I answer the right way. How do customers reach you most?",
-      options: ["By phone", "By text or message", "They walk in", "Through the website"]
+      question_es: "Una más, para responder de la manera correcta. ¿Cómo te contactan más tus clientes?",
+      options: ["By phone", "By text or message", "They walk in", "Through the website"],
+      options_es: ["Por teléfono", "Por texto o mensaje", "Entran en persona", "Por el sitio web"]
     }
   ];
 
@@ -680,9 +724,11 @@
   function showFollowup(){
     if(state.followIndex >= FOLLOWUPS.length){ hideAskback(); return; }
     var f = FOLLOWUPS[state.followIndex];
-    addMessage("Franklin", [f.question], "followup");
+    var fq = (LANG === "es" && f.question_es) ? f.question_es : f.question;
+    var fopts = (LANG === "es" && f.options_es) ? f.options_es : f.options;
+    addMessage("Franklin", [fq], "followup");
     optionRow.innerHTML = "";
-    f.options.forEach(function(opt){
+    fopts.forEach(function(opt){
       var b = el("button", "option-btn", opt);
       b.type = "button";
       b.addEventListener("click", function(){ pickOption(f, opt); });
@@ -693,13 +739,19 @@
   }
 
   function pickOption(follow, value){
-    state.profile.push({ field: follow.field, value: value });
+    var es = (LANG === "es");
+    var fField = (es && follow.field_es) ? follow.field_es : follow.field;
+    state.profile.push({ field: fField, value: value });
     addMessage("You", [value]);
     hideAskback();
     state.followIndex += 1;
-    var thanks = "Noted, and thank you. " + follow.field + ": " + value + ". It is on the panel to your side, with everything else I have learned in this conversation.";
+    var thanks = es
+      ? "Anotado, y gracias. " + fField + ": " + value + ". Está en el panel a tu lado, con todo lo demás que he aprendido en esta conversación."
+      : "Noted, and thank you. " + follow.field + ": " + value + ". It is on the panel to your side, with everything else I have learned in this conversation.";
     if(state.followIndex >= FOLLOWUPS.length){
-      thanks += " That is all I will ask for now. Press a topic any time and I will keep answering.";
+      thanks += es
+        ? " Eso es todo lo que preguntaré por ahora. Elige un tema cuando quieras y seguiré respondiendo."
+        : " That is all I will ask for now. Press a topic any time and I will keep answering.";
     }
     addMessage("Franklin", [thanks]);
     render();
@@ -922,10 +974,10 @@
   /* ---------- Answering ---------- */
   function matchTopic(text){
     var t = " " + text.toLowerCase() + " ";
-    if(/gift|card|certificate/.test(t)) return "gift";
-    if(/loyal|index|trust|referral|repeat/.test(t)) return "loyalty";
-    if(/start|begin|sign up|get going|onboard|setup|set up/.test(t)) return "start";
-    if(/mantra|what do you do|what does it do|who are you|your job/.test(t)) return "mantra";
+    if(/gift|card|certificate|tarjeta|regalo/.test(t)) return "gift";
+    if(/loyal|index|trust|referral|repeat|lealtad|índice|indice|confianza|recomend/.test(t)) return "loyalty";
+    if(/start|begin|sign up|get going|onboard|setup|set up|empez|comenz|iniciar/.test(t)) return "start";
+    if(/mantra|what do you do|what does it do|who are you|your job|qué hace|que hace/.test(t)) return "mantra";
     return null;
   }
 
@@ -933,13 +985,17 @@
     state.cameIn.push(questionText);
     if(key){
       var a = ANSWERS[key];
-      state.answered.push(a.short + ", answered from learned material.");
-      addMessage("Franklin", a.text);
-      speakAudio(key, a.text.join(" "));
+      var esA = (LANG === "es");
+      var aText = (esA && a.text_es) ? a.text_es : a.text;
+      var aShort = (esA && a.short_es) ? a.short_es : a.short;
+      state.answered.push(aShort + (esA ? ", respondido con material aprendido." : ", answered from learned material."));
+      addMessage("Franklin", aText);
+      speakAudio((esA ? "es/" : "") + key, aText.join(" "));
     } else {
       state.unsure.push(questionText);
-      addMessage("Franklin", UNKNOWN_TEXT);
-      speakAudio("unknown", UNKNOWN_TEXT.join(" "));
+      var uText = (LANG === "es") ? UNKNOWN_TEXT_ES : UNKNOWN_TEXT;
+      addMessage("Franklin", uText);
+      speakAudio((LANG === "es" ? "es/" : "") + "unknown", uText.join(" "));
     }
     render();
     if(!state.awaitingFollow){ showFollowup(); }
@@ -958,7 +1014,7 @@
     }
   }
 
-  document.querySelectorAll(".chip").forEach(function(chip){
+  document.querySelectorAll(".chip[data-topic]").forEach(function(chip){
     chip.addEventListener("click", function(){
       var key = chip.getAttribute("data-topic");
       handleQuestion(chip.textContent.trim(), key);
@@ -971,6 +1027,24 @@
     if(!q) return;
     input.value = "";
     handleQuestion(q, matchTopic(q));
+  });
+
+  /* ---------- Language: same knowledge, rendered in the language picked ---------- */
+  var LANG = "en";
+  function setLang(lang){
+    LANG = lang;
+    document.querySelectorAll(".lang-btn").forEach(function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
+    });
+    document.querySelectorAll(".chip[data-topic]").forEach(function(chip){
+      var a = ANSWERS[chip.getAttribute("data-topic")];
+      if(a) chip.textContent = (lang === "es" && a.label_es) ? a.label_es : a.label;
+    });
+    var cl = document.getElementById("chips-label");
+    if(cl) cl.textContent = (lang === "es") ? "Elige un tema" : "Start with a topic";
+  }
+  document.querySelectorAll(".lang-btn").forEach(function(b){
+    b.addEventListener("click", function(){ setLang(b.getAttribute("data-lang")); });
   });
 
   /* ---------- Sound toggle ---------- */
