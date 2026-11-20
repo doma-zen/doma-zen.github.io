@@ -400,7 +400,7 @@
           <h2>Franklin <span class="status"><i></i>Here now</span></h2>
           <p>Franklin answers from the business's own material: its documents, its owner's answers, and what he has been taught. If he has not learned something yet, he says so.</p>
           <div class="fineprint">
-            <p>Concept voice: your browser's built-in voice stands in. The real version speaks with the ElevenLabs voice the owner picks.</p>
+            <p>Voice: Franklin's answers are spoken in an ElevenLabs voice, the kind an owner picks for their own business. A real voice, not your browser's built-in one.</p>
             <p>Talking into it here uses your browser's built-in recognition to show the shape. The real version runs our own speech recognition, tuned on our side.</p>
             <p class="note-warn" id="speech-note" hidden>Speech is not available in this browser, so Franklin's answers stay text only here.</p>
           </div>
@@ -826,9 +826,47 @@
     }, est);
   }
 
+  /* Franklin's scripted answers, spoken in an ElevenLabs voice.
+     The audio files are pre-rendered and served from our own server,
+     so no key ever lives in this page. If a file fails to load or
+     play, the browser voice below stands in so the page never
+     goes silent. */
+  var AUDIO_BASE = "https://demo.domamantra.com/franklin-audio/";
+  var franklinAudio = new Audio();
+  franklinAudio.preload = "auto";
+
+  function speakAudio(name, fallbackText){
+    if(!soundOn) return;
+    var token = ++speakToken;
+    if(synth) synth.cancel();
+    try{ franklinAudio.pause(); }catch(e){}
+    franklinAudio.src = AUDIO_BASE + name + ".mp3";
+    franklinAudio.onplay = function(){
+      if(token !== speakToken) return;
+      stage.classList.add("is-talking");
+      startMouth();
+    };
+    var done = function(){
+      if(token !== speakToken) return;
+      stage.classList.remove("is-talking");
+      stopMouth();
+    };
+    franklinAudio.onended = done;
+    franklinAudio.onerror = function(){
+      if(token !== speakToken) return;
+      done();
+      speak(fallbackText);
+    };
+    var p = franklinAudio.play();
+    if(p && p.catch) p.catch(function(){
+      if(token === speakToken){ done(); speak(fallbackText); }
+    });
+  }
+
   function stopSpeaking(){
     speakToken++;
     if(synth) synth.cancel();
+    try{ franklinAudio.pause(); }catch(e){}
     stage.classList.remove("is-talking");
     stopMouth();
   }
@@ -897,11 +935,11 @@
       var a = ANSWERS[key];
       state.answered.push(a.short + ", answered from learned material.");
       addMessage("Franklin", a.text);
-      speak(a.text.join(" "));
+      speakAudio(key, a.text.join(" "));
     } else {
       state.unsure.push(questionText);
       addMessage("Franklin", UNKNOWN_TEXT);
-      speak(UNKNOWN_TEXT.join(" "));
+      speakAudio("unknown", UNKNOWN_TEXT.join(" "));
     }
     render();
     if(!state.awaitingFollow){ showFollowup(); }
