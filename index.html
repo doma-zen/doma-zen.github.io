@@ -1083,7 +1083,7 @@ details>summary::-webkit-details-marker{display:none}
       <h3 class="font-extrabold text-2xl">Stop 4 · One brain, three doors</h3>
       <span class="text-[12px] font-extrabold tracking-wide px-2.5 py-1 rounded-full" style="background:var(--gold);color:#171106">SAMPLE</span>
     </div>
-    <p class="muted mt-3 max-w-3xl leading-relaxed">The same knowledge base answers on every channel, so the answer never depends on which door a customer walked through. This sample runs on the made-up café’s base. Pick a door, then ask it something.</p>
+    <p class="muted mt-3 max-w-3xl leading-relaxed">The same knowledge base answers on every channel, so the answer never depends on which door a customer walked through. This sample runs on the made-up café’s base. Pick a door, then ask it something. Three of these it answers from the base. Two it has never been taught, and those two are the ones to watch: it does not stop at I don’t know, it plays the scenario through.</p>
     <div class="mt-5 flex flex-wrap gap-2" role="tablist" aria-label="Channel">
       <button class="chip font-bold px-4 py-2 rounded-full text-sm avatar-door" data-door="text" aria-selected="true">Text</button>
       <button class="chip font-bold px-4 py-2 rounded-full text-sm avatar-door" data-door="voice" aria-selected="false">Voice</button>
@@ -1094,6 +1094,7 @@ details>summary::-webkit-details-marker{display:none}
       <button class="chip font-bold px-4 py-2 rounded-full text-sm avatar-q" data-q="bread">Do you have gluten-free bread?</button>
       <button class="chip font-bold px-4 py-2 rounded-full text-sm avatar-q" data-q="book">Can I book a table for Saturday?</button>
       <button class="chip font-bold px-4 py-2 rounded-full text-sm avatar-q" data-q="parking">Where do I park?</button>
+      <button class="chip font-bold px-4 py-2 rounded-full text-sm avatar-q" data-q="thanksgiving">Are you open on Thanksgiving?</button>
     </div>
     <div class="surface2 rounded-2xl p-5 mt-5">
       <p class="text-[13px] font-bold tracking-[.14em] uppercase" style="color:var(--cyan)" id="avatarDoorLabel">Text · the café answers</p>
@@ -1847,6 +1848,11 @@ renderDq();
     parking: null
   };
   var miss = "I don’t know that yet, so I won’t guess. I have put it on the miss list, and the owner will teach me the answer once. Next time you ask, I will know.";
+  var scenarios = {
+    parking: "Parking has never been taught to me either, so here is what I know around it, played through. We are the café on the main street, open Tuesday to Saturday, 7 to 3. Picture the moment this question really lives in: a Saturday at 9, you have circled the block twice, the kids are hungry, and the next café is one turn away. Where our customers park decides whether that car stops or keeps driving. I have put it to the owner in those words: where should people park, and is there a lot or a side street we should name out loud? It sits on the miss list, counted, so the owner sees how many people needed it. The day the owner teaches me, I will answer it before you finish typing.",
+    thanksgiving: "That one has never been taught to me, and you are the fourth person to ask it, so let me play it through with what I do know. Our regular hours are Tuesday to Saturday, 7 in the morning to 3 in the afternoon, and nobody has ever told me our holiday hours. Picture Thanksgiving morning: the turkey is in, family lands at noon, and somebody remembers the rolls and the pie were supposed to come from us. If we are closed and never said so, that person is standing in an empty lot. If we opened for just two hours that morning for pickups, this same question turns into a sales morning that was never on the calendar, two hours that can do a hundred times a normal morning’s business. So I am putting it to the owner in exactly those words: what are our Thanksgiving hours, and should pickup orders open for them? Your asking is counted, too. Asked once, it is a question. Asked four times, it is a pattern the owner needs to see. Asked fifty times, it is a market, and the owner sees the count. Once the owner teaches me, the next person who asks gets the answer on the spot."
+  };
+  var scenarioNote = "A miss, played through: what the base knows, the moment the question lives in, and the question already on its way to the owner. Counted, never shrugged off.";
   var door = "text";
   var doors = document.querySelectorAll(".avatar-door");
   var qs = document.querySelectorAll(".avatar-q");
@@ -1857,7 +1863,10 @@ renderDq();
   function render(q){
     var a = base[q];
     label.textContent = names[door];
-    if (a === null) {
+    if (scenarios[q]) {
+      answer.textContent = (door === "phone" ? "“" + scenarios[q] + "”" : scenarios[q]);
+      note.textContent = scenarioNote;
+    } else if (a === null) {
       answer.textContent = miss;
       note.textContent = "The honest don’t-know is part of the product: it is logged, taught once, and never asked twice.";
     } else {
@@ -1868,7 +1877,7 @@ renderDq();
     }
     if (door === "voice" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(new SpeechSynthesisUtterance(a === null ? miss : a));
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance(scenarios[q] ? scenarios[q] : (a === null ? miss : a)));
     }
   }
   doors.forEach(function(b){ b.addEventListener("click", function(){
