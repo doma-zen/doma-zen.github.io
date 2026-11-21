@@ -235,9 +235,9 @@ details>summary::-webkit-details-marker{display:none}
   <!-- Test Drive doorway -->
   <div class="surface rounded-3xl p-6 sm:p-8 mt-6">
     <h2 class="font-extrabold text-2xl sm:text-3xl">Do not take our word for it. Take the drive.</h2>
-    <p class="muted mt-3 max-w-3xl leading-relaxed">A five stop test drive in a working sample of a real business: ask it a question, watch it hold what it does not know, book without a phone, see the work board, and watch your first scorecard build itself. It starts with one sample business today, a dog treat shop in Wicker Park, and it is how every Mantra pilot begins: drive it, then hang it on your own site, and count what comes through.</p>
+    <p class="muted mt-3 max-w-3xl leading-relaxed">A five stop test drive in a working sample of a real business: ask it a question, watch it hold what it does not know, book without a phone, see the work board, and watch your first scorecard build itself. It starts with one sample business today, a dog treat shop, and it is how every Mantra pilot begins: drive it, then hang it on your own site, and count what comes through.</p>
     <p class="muted mt-3 max-w-3xl leading-relaxed">The pilot is the proof. We hang the knowledge base off your site, run the interactions, and both sides watch the same net: how many came through, how big they were, whether they fit, and whether they were worth your time. The scorecard is not our report about ourselves. It is the record, and you can review every line.</p>
-    <p class="mt-3 text-sm muted">Sample experience, built on a real loaded business, Treats de Cuisine.</p>
+    <p class="mt-3 text-sm muted">Sample experience, built on a fictional business, The Biscuit Tin.</p>
     <div class="mt-5">
       <button class="btn-primary font-bold px-6 py-3.5 rounded-full text-[15px]" data-goto="start">Request a starter Brief</button>
     </div>
@@ -1167,7 +1167,7 @@ details>summary::-webkit-details-marker{display:none}
         <button id="giftPrev" class="font-bold px-4 py-2.5 rounded-full text-sm chip">← Back</button>
         <button id="giftNext" class="btn-primary font-bold px-5 py-2.5 rounded-full text-sm flex-1">Next step →</button>
       </div>
-      <p class="mt-4 text-[13px] muted leading-relaxed">Example only. Kat decides the amount at her shop. The dog washer, the groomer, and the vet are separate shops, with separate cards and separate credits. They are not part of this example.</p>
+      <p class="mt-4 text-[13px] muted leading-relaxed">Example only. The owner decides the amount at the shop. The dog washer, the groomer, and the vet are separate shops, with separate cards and separate credits. They are not part of this example.</p>
       <button class="btn-quiet mt-2 font-bold text-sm" data-toggle="iwih" aria-expanded="false">And I Want / I Have? ↓</button>
       <div class="reveal" id="reveal-iwih">
         <p class="mt-3 text-sm leading-relaxed muted">The neighborly version of the same idea. Inside a trusted local network, members post what they want and what they have: a free Saturday, a ladder, a spare ticket. Credits from the gift card can settle the difference, so thanks becomes a currency the neighborhood already understands.</p>
@@ -1407,11 +1407,11 @@ details>summary::-webkit-details-marker{display:none}
     <form id="leadForm" class="lg:col-span-3 surface rounded-3xl p-6 sm:p-8 space-y-4">
       <div>
         <label for="f-biz" class="font-bold text-sm">Business name</label>
-        <input id="f-biz" required class="mt-1.5 w-full rounded-xl px-4 py-3" placeholder="e.g. Treats de Cuisine" autocomplete="organization" />
+        <input id="f-biz" required class="mt-1.5 w-full rounded-xl px-4 py-3" placeholder="e.g. The Biscuit Tin" autocomplete="organization" />
       </div>
       <div>
         <label for="f-site" class="font-bold text-sm">Your website</label>
-        <input id="f-site" required class="mt-1.5 w-full rounded-xl px-4 py-3" placeholder="e.g. treatsdecuisine.com" inputmode="url" />
+        <input id="f-site" required class="mt-1.5 w-full rounded-xl px-4 py-3" placeholder="e.g. thebiscuittin.com" inputmode="url" />
       </div>
       <div class="grid sm:grid-cols-2 gap-4">
         <div>
@@ -1591,10 +1591,10 @@ document.getElementById('resetBtn').addEventListener('click', resetStory);
 
 // ---- Gift card 5-step flow ----
 var giftSteps = [
-  {n:'Step 1 of 5 · You buy', t:'You buy treats at Kat’s shop, Treats de Cuisine in Wicker Park. Good treats, happy dog, nothing unusual yet.'},
-  {n:'Step 2 of 5 · You tell a friend', t:'You recommend Kat’s shop to a friend. Not an ad, not a coupon blast. A person you know, told by you.'},
-  {n:'Step 3 of 5 · Your friend buys', t:'Your friend comes in and buys treats. Kat’s system connects the visit to your recommendation, because it was recorded when it happened.'},
-  {n:'Step 4 of 5 · Kat thanks you', t:'Kat gives you a credit for your next treats at Kat’s shop. Example only, Kat decides the amount. One shop, one credit, no confusion about who gave what to whom.'},
+  {n:'Step 1 of 5 · You buy', t:'You buy treats at The Biscuit Tin, a dog treat shop. Good treats, happy dog, nothing unusual yet.'},
+  {n:'Step 2 of 5 · You tell a friend', t:'You recommend the shop to a friend. Not an ad, not a coupon blast. A person you know, told by you.'},
+  {n:'Step 3 of 5 · Your friend buys', t:'Your friend comes in and buys treats. The shop’s system connects the visit to your recommendation, because it was recorded when it happened.'},
+  {n:'Step 4 of 5 · The shop thanks you', t:'The shop gives you a credit for your next treats. Example only, the owner decides the amount. One shop, one credit, no confusion about who gave what to whom.'},
   {n:'Step 5 of 5 · You come back', t:'You come back, and your next treats are waiting on that credit. Not because you had to call fifty times or chase anyone, because you were remembered. That is why you keep coming back.'}
 ];
 var gi = 0;
