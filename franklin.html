@@ -300,6 +300,9 @@
     .woof-bubble{right:-8px}
   }
 </style>
+<!-- Privacy-friendly analytics by Plausible. Mantra counting: page views and the interactions we count. Cookieless, no personal data. -->
+<script async src="https://plausible.io/js/pa-wlGmMfd9ihjxtByLpxUdD.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
 </head>
 <body>
 <div class="wrap">
@@ -1224,6 +1227,23 @@
   });
 
   render();
+})();
+</script>
+
+<script>
+/* Mantra counting: every Franklin voice play, by language (Plausible custom events). */
+(function(){
+  var origPlay = HTMLMediaElement.prototype.play;
+  HTMLMediaElement.prototype.play = function(){
+    try{
+      var src = this.currentSrc || this.src || "";
+      if(src.indexOf("franklin-audio/") !== -1 && /\.mp3(\?|$)/.test(src)){
+        var lang = src.indexOf("franklin-audio/es/") !== -1 ? "Spanish" : "English";
+        if(window.plausible) window.plausible("Franklin Voice Play", {props: {language: lang}});
+      }
+    }catch(e){}
+    return origPlay.apply(this, arguments);
+  };
 })();
 </script>
 </body>
